@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import BrowserScreen from "./screens/Browser";
 import StartPlace from "./screens/StartPlace";
 import TaskScreen from "./screens/TaskScreen";
+import Task from "./screens/Task";
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -17,13 +17,13 @@ class App extends Component {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="browser"
-            component={BrowserScreen}
+            name="taskScreen"
+            component={TaskScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="taskScreen"
-            component={TaskScreen}
+            name="task"
+            component={Task}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

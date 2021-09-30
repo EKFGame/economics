@@ -61,11 +61,11 @@ class TaskScreen extends Component {
     return (
       <View style={{ flex: 1, top: 30 }}>
         <StatusBar style="auto" />
-        <View style={{ flex: 2 }}>
+        <View style={{ flex: 1.5 }}>
           <WebBrowser outsideuri={DataTasks[1].uri} />
         </View>
         <View style={{ flex: 1 }}>
-          <Task DataToShow={DataTasks[1]} />
+          <Task DataToShow={DataTasks[1]} navigation={this.props.navigation} />
         </View>
       </View>
     );

@@ -18,7 +18,6 @@ export default MyTextInput;
 
 const styles = StyleSheet.create({
   input: {
-    height: 44,
     padding: 7,
     backgroundColor: 'rgba(255,255,255,0.4)',
     borderColor: '#ddd',
@@ -34,11 +33,14 @@ const styles = StyleSheet.create({
     height: 80,
     marginLeft: 5,
     marginRight: 5,
+    width: 100,
   },
   title: {
     paddingTop: 10,
     paddingBottom: 5,
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'left',
+    color: "lightgrey",
+    fontWeight: 'bold',
   },
 });

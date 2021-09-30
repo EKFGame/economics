@@ -1,11 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Button from "../components/Button";
+import ButtonMy from "../components/Button";
 import TextInput from "../components/TextInput";
 
 class Task extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -22,23 +21,43 @@ class Task extends Component {
     this.setState({ answer2 });
   }
 
-  render() {
-    return <View style={styles.container}>
+  handleSubmitGo = () => {
+    this.props.navigation.navigate("startPlace");
+  }
 
-        <Text>{this.props.DataToShow.question1}</Text>
+  render() {
+
+    return (
+      <View style={styles.container}>
+        
+        
+        <Text style={styles.questionText}>
+          {this.props.DataToShow.question1}
+        </Text>
         <TextInput
-            title="Skaičius:"
-            value={this.state.answer1}
-            onChangeText={(text) => this.answer1Change(text)}
+          title="Skaičius:"
+          value={this.state.answer1}
+          onChangeText={(text) => this.answer1Change(text)}
         />
 
-        <Text>{this.props.DataToShow.question2}</Text>
+        <Text style={styles.questionText}>{this.props.DataToShow.question2}</Text>
         <TextInput
             title="Kodas:"
             value={this.state.answer2}
             onChangeText={(text) => this.answer2Change(text)}
         />
-    </View>;
+
+        <ButtonMy
+          color="darkgreen"
+          title="Navigate"
+          onPress={() => {
+            this.handleSubmitGo();
+          }}
+        />
+
+        
+      </View>
+    );
   }
 }
 
@@ -50,6 +69,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#4eb15b",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 25,
+  },
+  questionText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "white",
+    textAlign: "center",
   },
 });
 

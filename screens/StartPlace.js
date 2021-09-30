@@ -13,7 +13,7 @@ class StartPlace extends Component {
     }
     
     handleSubmitGo = () => {
-      this.props.navigation.navigate("browser");
+      this.props.navigation.navigate("taskScreen");
     }
 
     render() {

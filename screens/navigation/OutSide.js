@@ -7,7 +7,7 @@ const IMAGE_WIDTH = 3382;
 const IMAGE_HEIGHT = 1611;
 const screen = Dimensions.get("window");
 
-class Laukas extends Component {
+class Outside extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class Laukas extends Component {
   };
 
   navigateInside = () => {
-    this.props.navigation.navigate('startPlace');
+    this.props.navigation.navigate('inside');
   };
 
   navigateToWeb = () => {
@@ -86,4 +86,4 @@ class Laukas extends Component {
   }
 }
 
-export default Laukas;
+export default Outside;

@@ -7,7 +7,9 @@ import StartPlace from "./screens/StartPlace";
 import TaskScreen from "./screens/TaskScreen";
 import Task from "./screens/Task";
 import Outside from "./screens/navigation/OutSide";
+import Inside from "./screens/navigation/Inside";
 import WebToCheck from "./screens/WebToCheck";
+import Lift from "./screens/navigation/lift";
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -16,7 +18,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="outside">
+        <Stack.Navigator initialRouteName="lift">
           <Stack.Screen
             name="startPlace"
             component={StartPlace}
@@ -37,11 +39,21 @@ class App extends Component {
             component={Outside}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="inside"
+            component={Inside}
+            options={{ headerShown: false }}
+          />
             <Stack.Screen
             name="webtocheck"
             component={WebToCheck}
             options={{ headerShown: true }}
             options={{ title: 'Žiniatinklis' }}
+          />
+            <Stack.Screen
+            name="lift"
+            component={Lift}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

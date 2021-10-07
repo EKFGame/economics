@@ -18,7 +18,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="inside">
+        <Stack.Navigator initialRouteName="lift">
           <Stack.Screen
             name="startPlace"
             component={StartPlace}

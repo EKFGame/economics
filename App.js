@@ -10,6 +10,7 @@ import Outside from "./screens/navigation/OutSide";
 import Inside from "./screens/navigation/Inside";
 import WebToCheck from "./screens/WebToCheck";
 import Lift from "./screens/navigation/lift";
+import ActionSpace from "./screens/navigation/actionSpace";
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -53,6 +54,11 @@ class App extends Component {
             <Stack.Screen
             name="lift"
             component={Lift}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="actionSpace"
+            component={ActionSpace}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

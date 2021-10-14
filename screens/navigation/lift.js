@@ -3,13 +3,12 @@ import {
   StyleSheet,
   Animated,
   PanResponder,
-  Text,
   Dimensions,
   View,
-  TouchableOpacity,
   Image,
   ImageBackground,
 } from "react-native";
+import Button from "../../components/Button";
 
 const screen = Dimensions.get("window");
 const sizeofx = screen.width / 2;
@@ -21,12 +20,31 @@ const tablet = require("../../images/tablet.png");
 const card = require("../../images/card.png");
 const abacus = require("../../images/abacus.png");
 
-const goods = { 1: {thing: paratute, width: 160, height: 250, posx: (sizeofx / 10) * 7 *-1, posy: sizeofy / 5}, 
-                2: {thing: umbrela, width: 300, height: 300, posx: (sizeofx / 10) * 5 * -1, posy: sizeofy / 5},
-                3: {thing: tablet, width: 150, height: 150, posx: -5, posy: (sizeofy /12) * 8},
-                0: {thing: card, width: 65, height: 35, posx: -50, posy: 20},
-                4: {thing: abacus, width: 150, height: 150, posx: -50, posy: -40},
-              };
+const goods = {
+  1: {
+    thing: paratute,
+    width: 160,
+    height: 250,
+    posx: (sizeofx / 10) * 7 * -1,
+    posy: sizeofy / 5,
+  },
+  2: {
+    thing: umbrela,
+    width: 300,
+    height: 300,
+    posx: (sizeofx / 10) * 5 * -1,
+    posy: sizeofy / 5,
+  },
+  3: {
+    thing: tablet,
+    width: 150,
+    height: 150,
+    posx: -5,
+    posy: (sizeofy / 12) * 8,
+  },
+  0: { thing: card, width: 65, height: 35, posx: -50, posy: 20 },
+  4: { thing: abacus, width: 150, height: 150, posx: -50, posy: -40 },
+};
 class Lift extends Component {
   constructor(props) {
     super(props);
@@ -38,26 +56,25 @@ class Lift extends Component {
     this.state = {
       imageBack: require("../../images/liftfull.png"),
       doors: require("../../images/liftfull.png"),
-      doorsAreClosed: true,
-      showDors: true,
+      showDorsStart: true,
+      showDorsEnd: false,
+      allGoodArePicked: false,
 
-      showDraggable: true,
-      dropZoneValues: null,
+      goodsArePickedUp: {
+        0: { pickup: false },
+        1: { pickup: false },
+        2: { pickup: false },
+        3: { pickup: false },
+        4: { pickup: false },
+      },
     };
 
     this.givePlaces();
-  }
-
-  componentDidMount() {
     this.openLiftDoors();
   }
 
   givePlaces = () => {
-    // console.log('x');
-    // console.log(sizeofx);
-    // console.log('y');
-    // console.log(sizeofy);
-    for (let i = 0; i < 5; i++ ) {
+    for (let i = 0; i < 5; i++) {
       this.pan[i].x.setValue(goods[i].posx);
       this.pan[i].y.setValue(goods[i].posy);
     }
@@ -80,63 +97,150 @@ class Lift extends Component {
       },
 
       onPanResponderRelease: (e, gesture) => {
-        this.pan[index].flattenOffset();
-        this.pan[index].x.setValue(0);
-        this.pan[index].y.setValue(-100);
+        Animated.spring(this.pan[index], {
+          toValue: {
+            y: sizeofy + 100,
+            x: 0,
+          },
+          duration: 700,
+          useNativeDriver: true,
+        }).start();
+
+        setTimeout(() => {
+          this.pan[index].flattenOffset();
+          this.pan[index].x.setValue(0),
+            this.pan[index].y.setValue(sizeofy + 100);
+        }, 750);
+
+        this.state.goodsArePickedUp[index].pickup = true;
+        this.checkOrAllGoodsArePicked();
+        
       },
     });
   }
 
-  SetInDropZone = (index) => {
-    let stringFormat = JSON.stringify(this.pan[index].x);
-    let PanXfloatFormat = parseFloat(stringFormat);
+  checkOrAllGoodsArePicked = () => {
+    
+    let counter = 0;
 
-    let DropZoneXFloat = parseFloat(50);
+    for (let i = 0; i < 5; i++) {
+      if (this.state.goodsArePickedUp[i].pickup == true) {
+        counter++;
+      }
+    }
+    
+    if (counter == 5) {
+      this.setState({ allGoodArePicked: true });
+    }
 
-    //let distance = DropZoneXFloat - PanXfloatFormat;
+    counter = 0;
+
+    this.forceUpdate();
+    
   };
 
-  isDropZone(gesture) {
-    var dz = this.state.dropZoneValues;
-    return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
+  clearGoodsData = () => {
+    
+    for (let i = 0; i < 5; i++) {
+      this.state.goodsArePickedUp[i].pickup = false;
+    }
+
+    this.setState({allGoodArePicked: false});
   }
 
-  setDropZoneValues(event) {
-    this.setState({
-      dropZoneValues: event.nativeEvent.layout,
-    });
-  }
-
-  openLiftDoors = () => {
-    if (this.state.doorsAreClosed == true) {
+  closeLiftDoors = () => {
+    
       setTimeout(() => {
-        this.setState({ imageBack: require("../../images/liftas.jpg") });
+        this.setState({ showDorsEnd: true });
       }, 600);
       setTimeout(() => {
-        this.setState({ doors: require("../../images/lift14.png") });
+        this.setState({ doors: require("../../images/lift34.png") });
       }, 1000);
       setTimeout(() => {
         this.setState({ doors: require("../../images/lift12.png") });
       }, 1600);
       setTimeout(() => {
-        this.setState({ doors: require("../../images/lift34.png") });
+        this.setState({ doors: require("../../images/lift14.png") });
       }, 2200);
       setTimeout(() => {
-        this.setState({ showDors: false });
+        this.setState({ doors: require("../../images/liftfull.png") });
       }, 2800);
-    }
-    this.setState({ doorsAreClosed: false });
+      setTimeout(() => {
+        this.setState({ imageBack: require("../../images/liftfull.png") });
+      }, 2800);
+      setTimeout(() => {
+        this.props.navigation.navigate('actionSpace');
+        this.setState({ showDorsStart: true });
+        this.setState({ showDorsEnd: false });
+        this.clearGoodsData();
+        this.givePlaces();
+      }, 3200);
+    
+  };
+
+  openLiftDoors = () => {
+    
+    setTimeout(() => {
+      this.setState({ imageBack: require("../../images/liftas.jpg") });
+    }, 600);
+    setTimeout(() => {
+      this.setState({ doors: require("../../images/lift14.png") });
+    }, 1000);
+    setTimeout(() => {
+      this.setState({ doors: require("../../images/lift12.png") });
+    }, 1600);
+    setTimeout(() => {
+      this.setState({ doors: require("../../images/lift34.png") });
+    }, 2200);
+    setTimeout(() => {
+      this.setState({ showDorsStart: false });
+    }, 2800);
+  
+  };
+
+  gotoActionSpace = () => {
+    this.closeLiftDoors();
   };
 
   render() {
-    const imageShow = () => {
-      if (this.state.showDors == true)
+    const imageShowOpen = () => {
+      if (this.state.showDorsStart == true)
         return (
           <Image
             source={this.state.doors}
             style={styles.image}
             resizeMode="cover"
           ></Image>
+        );
+      else return;
+    };
+
+    const imageShowClose = () => {
+      if (this.state.showDorsEnd == true)
+        return (
+          <Image
+            source={this.state.doors}
+            style={styles.image}
+            resizeMode="cover"
+          ></Image>
+        );
+      else return;
+    };
+
+    const buttonShow = () => {
+      if (this.state.allGoodArePicked)
+        return (
+          <View style={styles.buttonplace}>
+            <Button
+              color="green"
+              title="5"
+              W={40}
+              H={40}
+              onPress={() => {
+                this.gotoActionSpace();
+              }}
+            />
+          </View>
         );
       else return;
     };
@@ -148,27 +252,23 @@ class Lift extends Component {
         style={styles.image}
         resizeMode="stretch"
       >
-        
-
         {this.dataDrag.map((d, index) => (
           <Animated.View
             key={index}
             {...this.getPanResponder(index).panHandlers}
             style={[
               styles.draggableContainer,
-              { width: goods[index].width, 
-                height: goods[index].height},
+              { width: goods[index].width, height: goods[index].height },
               this.pan[index].getTranslateTransform(),
             ]}
           >
-          <Image
-            source={goods[index].thing}
-            style={styles.image}
-          ></Image>
+            <Image source={goods[index].thing} style={styles.image}></Image>
           </Animated.View>
         ))}
 
-      {/* {imageShow()} */}
+        {imageShowOpen()}
+        {buttonShow()}
+        {imageShowClose()}
       </ImageBackground>
     );
   }
@@ -183,19 +283,15 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  dropZone: {
-    height: 70,
-    backgroundColor: "#2c3e50",
-    //justifyContent: 'flex-start',
-  },
   draggableContainer: {
     position: "absolute",
-    top: screen.height/2,
-    left: screen.width/2,
-    // width: sizeofx / 4 * 3,
-    // height: (sizeofx / 4) * 3,
+    top: screen.height / 2,
+    left: screen.width / 2,
   },
-  thingsSize: {
+  buttonplace: {
+    position: "absolute",
+    top: (screen.height/10) * 5.5,
+    right: 20,
   },
   textInLetter: {
     textAlign: "center",

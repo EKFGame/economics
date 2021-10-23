@@ -25,6 +25,7 @@ class ActionSpace extends Component {
       imageBack: require("../../images/liftfull.png"),
       showDorsStart: true,
       gameStart: false,
+      doors: require("../../images/liftfull.png"),
 
       goods : {
         0: { thing: cubegrey, posx: -sizeofx/1.5, posy: 0, respond: false },
@@ -206,8 +207,17 @@ class ActionSpace extends Component {
 
   }
 
+  gotoActionSpace = () => {
+    this.props.navigation.navigate('questions');
+    this.setState({gameStart: false});
+    this.state.goods[0].respond = true;
+    this.state.goods[1].respond = true;
+    this.state.goods[2].respond = true;
+    this.forceUpdate();
+  }
+
   render() {
-    
+
     const imageShowOpen = () => {
       if (this.state.showDorsStart == true)
         return (
@@ -221,7 +231,7 @@ class ActionSpace extends Component {
     };
     
     const buttonShow = () => {
-      if (this.state.gameStart)
+      if (this.state.gameStart == true)
         return (
           <View style={styles.buttonplace}>
             <Button
@@ -255,13 +265,13 @@ class ActionSpace extends Component {
             ]}
           >
             <TouchableOpacity onPress={() => { this.changeLocation(index); }}>
-            <Image source={this.state.goods[index].thing} style={styles.image}></Image>
+              <Image source={this.state.goods[index].thing} style={styles.image}></Image>
             </TouchableOpacity>
           </Animated.View>
         ))}
 
       {buttonShow()}
-      {/* {imageShowOpen()}     */}
+      {imageShowOpen()}    
       
       </ImageBackground>
     );

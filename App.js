@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView } from "react-native";
+import { View, BackAndroid } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import StartPlace from "./screens/StartPlace";
@@ -11,15 +11,17 @@ import Inside from "./screens/navigation/Inside";
 import WebToCheck from "./screens/WebToCheck";
 import Lift from "./screens/navigation/lift";
 import ActionSpace from "./screens/navigation/actionSpace";
+import Questions from "./screens/Questions";
 const Stack = createStackNavigator();
 
 class App extends Component {
+  
   render() {
     return (
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="lift">
+        <Stack.Navigator initialRouteName="actionSpace">
           <Stack.Screen
             name="startPlace"
             component={StartPlace}
@@ -59,6 +61,11 @@ class App extends Component {
           <Stack.Screen
             name="actionSpace"
             component={ActionSpace}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="questions"
+            component={Questions}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

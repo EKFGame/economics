@@ -12,46 +12,56 @@ const cubegrey = require("../../images/cubegreytwo.png");
 
 const cubeSize = 50;
 
+const paratute = require("../../images/paratutebag.png"); //1
+const umbrela = require("../../images/umbrela.png"); //3
+const tablet = require("../../images/tablet.png"); //5
+const card = require("../../images/card.png"); //4
+const abacus = require("../../images/abacus.png"); //2
 
 class ActionSpace extends Component {
   constructor(props) {
     super(props);
     
-    this.dataDrag = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+    this.dataDrag = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]; // 15, 16, 17];
 
     this.pan = this.dataDrag.map(() => new Animated.ValueXY({x: 0, y: -sizeofy/0.1}));
 
     this.state = {
-      imageBack: require("../../images/liftfull.png"),
+      //imageBack: require("../../images/liftfull.png"),
+      imageBack: require("../../images/space.jpg"),
       showDorsStart: true,
       gameStart: false,
+      gameEnd: false,
       doors: require("../../images/liftfull.png"),
 
-      goods : {
-        0: { thing: cubegrey, posx: -sizeofx/1.5, posy: 0, respond: false },
-        1: { thing: cube, posx: 0, posy: 0, respond: false },
-        2: { thing: cubegrey, posx:  sizeofx/1.5, posy: 0, respond: false },
-        3: { thing: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/1.5, respond: false },
-        4: { thing: cube, posx: 0, posy: -sizeofy/1.5, respond: false },
-        5: { thing: cubegrey, posx: sizeofx/1.5, posy: -sizeofy/1.5, respond: false },
-        6: { thing: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/0.9, respond: false },
-        7: { thing: cubegrey, posx: 0, posy: -sizeofy/0.9, respond: false },
-        8: { thing: cube, posx: sizeofx/1.5, posy: -sizeofy/0.9, respond: false },
-        9: { thing: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
-        10: { thing: cube, posx: 0, posy: -sizeofy/0.1, respond: false },
-        11: { thing: cubegrey, posx: sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
-        12: { thing: cube, posx: -sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
-        13: { thing: cubegrey, posx: 0, posy: -sizeofy/0.1, respond: false },
-        14: { thing: cubegrey, posx: sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
-        15: { thing: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
-        16: { thing: cube, posx: 0, posy: -sizeofy/0.1, respond: false },
-        17: { thing: cubegrey, posx: sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
+      basePlaces : {
+        0: { base: cubegrey, posx: -sizeofx/1.5, posy: 0, respond: false },
+        1: { base: cube, posx: 0-25, posy: 0, respond: false, hint: paratute },
+        2: { base: cubegrey, posx:  sizeofx/1.5 - 50, posy: 0, respond: false },
+        3: { base: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/1.5, respond: false },
+        4: { base: cube, posx: 0-25, posy: -sizeofy/1.5, respond: false, hint: abacus },
+        5: { base: cubegrey, posx: sizeofx/1.5-50, posy: -sizeofy/1.5, respond: false },
+        6: { base: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/0.9, respond: false },
+        7: { base: cubegrey, posx: 0-25, posy: -sizeofy/0.9, respond: false },
+        8: { base: cube, posx: sizeofx/1.5-50, posy: -sizeofy/0.9, respond: false, hint: umbrela },
+        9: { base: cubegrey, posx: -sizeofx/1.5, posy: -sizeofy/0.1, respond: false },
+        10: { base: cube, posx: 0-25, posy: -sizeofy/0.1, respond: false, hint: card },
+        11: { base: cubegrey, posx: sizeofx/1.5-50, posy: -sizeofy/0.1, respond: false },
+        12: { base: cube, posx: -sizeofx/1.5, posy: -sizeofy/0.1, respond: false, hint: tablet },
+        13: { base: cubegrey, posx: 0-25, posy: -sizeofy/0.1, respond: false },
+        14: { base: cubegrey, posx: sizeofx/1.5-50, posy: -sizeofy/0.1, respond: false },
+
+        15: { hint: paratute, posx: sizeofx-40, posy: -sizeofy+60, respond: true, used: false },
+        16: { hint: abacus, posx: sizeofx-40, posy: -sizeofy+120, respond: false, used: false },
+        17: { hint: umbrela, posx: sizeofx-40, posy: -sizeofy+180, respond: false, used: false },
+        18: { hint: card, posx: sizeofx-40, posy: -sizeofy+240, respond: false, used: false },
+        19: { hint: tablet, posx: sizeofx-40, posy: -sizeofy+300, respond: false, used: false },
       },
 
       placesOfX : {
         0 : {posx: -sizeofx/1.5},
-        1 : {posx: 0},
-        2 : {posx:  sizeofx/1.5},
+        1 : {posx: 0 -25},
+        2 : {posx:  sizeofx/1.5-50},
       },
 
       placesOfY : {
@@ -66,15 +76,14 @@ class ActionSpace extends Component {
     };
     
     this.openLiftDoors();
+    
   }
 
   givePlaces = () => {
-    
-    for (let i = 0; i < 18; i++) {
-      this.pan[i].x.setValue(this.state.goods[i].posx - cubeSize);
-      this.pan[i].y.setValue(this.state.goods[i].posy);
+    for (let i = 0; i < 20; i++) {
+      this.pan[i].x.setValue(this.state.basePlaces[i].posx - cubeSize);
+      this.pan[i].y.setValue(this.state.basePlaces[i].posy);
     }
-
   };
 
   openLiftDoors = () => {
@@ -112,6 +121,22 @@ class ActionSpace extends Component {
     });
   }
 
+  movePanObject = (index, goX) => {
+    Animated.spring(this.pan[index], {
+      toValue: {
+        y: 0,
+        x: goX,
+      },
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }
+
+  endGame = () => {
+    this.setState({gameEnd: true});
+    this.forceUpdate();
+  }
+
   changeLocation = (index) => {
 
     let pointOfMove = 0;
@@ -121,50 +146,94 @@ class ActionSpace extends Component {
     let posOfy = 0;
     let moveIn = false;
 
-    if (this.state.goods[index].respond == true) {
+    let goToLift = false;
 
-      moveIn = true;
+    if (this.state.basePlaces[index].respond == true) {
 
-      if(index == 1){
+      if(index == 15){
+        this.movePanObject(index, sizeofx-90);
+        this.state.basePlaces[15].used = true;
+        this.state.basePlaces[0].respond = true;
+        this.state.basePlaces[1].respond = true;
+        this.state.basePlaces[2].respond = true;
+      }
+
+      if(index == 16){
+        // this.movePanObject(16, sizeofx-90);
+        this.movePanObject(index, sizeofx-90);
+        this.state.basePlaces[16].used = true;
+        this.state.basePlaces[3].respond = true;
+        this.state.basePlaces[4].respond = true;
+        this.state.basePlaces[5].respond = true;
+      }
+
+      if(index == 17){
+        // this.movePanObject(17, sizeofx-90);
+        this.movePanObject(index, sizeofx-90);
+        this.state.basePlaces[17].used = true;
+        this.state.basePlaces[6].respond = true;
+        this.state.basePlaces[7].respond = true;
+        this.state.basePlaces[8].respond = true;
+      }
+
+      if(index == 18){
+        // this.movePanObject(18, sizeofx-90);
+        this.movePanObject(index, sizeofx-90);
+        this.state.basePlaces[18].used = true;
+        this.state.basePlaces[9].respond = true;
+        this.state.basePlaces[10].respond = true;
+        this.state.basePlaces[11].respond = true;
+      }
+
+      if(index == 19){
+        // this.movePanObject(19, sizeofx-90);
+        this.movePanObject(index, sizeofx-90);
+        this.state.basePlaces[19].used = true;
+        this.state.basePlaces[12].respond = true;
+        this.state.basePlaces[13].respond = true;
+        this.state.basePlaces[14].respond = true;
+      }
+
+      if(index == 1 && this.state.basePlaces[15].used == true){
+        moveIn = true;
         pointOfMove = 0;
-        this.state.goods[3].respond = true;
-        this.state.goods[4].respond = true;
-        this.state.goods[5].respond = true;
+        this.state.basePlaces[16].respond = true;
+        this.movePanObject(15, sizeofx+10);
       }
 
-      if(index == 4){
+      if(index == 4 && this.state.basePlaces[16].used == true){
+        moveIn = true;
         pointOfMove = 3;
-        this.state.goods[6].respond = true;
-        this.state.goods[7].respond = true;
-        this.state.goods[8].respond = true;
+        this.state.basePlaces[17].respond = true;
+        this.movePanObject(16, sizeofx+10);
       }
 
-      if(index == 8){
+      if(index == 8 && this.state.basePlaces[17].used == true == true){
+        moveIn = true;
         pointOfMove = 6;
-        this.state.goods[9].respond = true;
-        this.state.goods[10].respond = true;
-        this.state.goods[11].respond = true;
+        this.state.basePlaces[18].respond = true;
+        this.movePanObject(17, sizeofx+10);
       }
 
-      if(index == 10){
+      if(index == 10 && this.state.basePlaces[18].used == true == true ){
+        moveIn = true;
         pointOfMove = 9;
-        this.state.goods[12].respond = true;
-        this.state.goods[13].respond = true;
-        this.state.goods[14].respond = true;
+        this.state.basePlaces[19].respond = true;
+        this.movePanObject(18, sizeofx+10);
       }
 
-      if(index == 12){
+      if(index == 12 && this.state.basePlaces[19].used == true == true){
+        moveIn = true;
         pointOfMove = 12;
-        this.state.goods[15].respond = true;
-        this.state.goods[16].respond = true;
-        this.state.goods[17].respond = true;
+        this.movePanObject(19, sizeofx+10);
+        this.endGame();
       }
 
     }
     
-    if (moveIn == true){
+    if( moveIn == true){
     
-      if(index == 1 || index == 4 || index == 8 || index == 10 || index == 12 || index == 16){
+      if(index == 1 || index == 4 || index == 8 || index == 10 || index == 12){
 
         for(let i = pointOfMove; i < 15; i++){
           
@@ -175,7 +244,6 @@ class ActionSpace extends Component {
           }
           
           posOfX = this.state.placesOfX[xCounter].posx;
-          console.log(iterationCounterY + " - - - ");
           posOfy = this.state.placesOfY[iterationCounterY].posy;
 
           Animated.spring(this.pan[i], {
@@ -200,19 +268,23 @@ class ActionSpace extends Component {
         iterationCounterX = 0;
         iterationCounterY = 0;
 
-      } else {
-        this.props.navigation.navigate('lift');
       }
-    }  
+          
+    }
 
+    else if ( index != 1 && index != 4 && index != 8 && index != 10 && index != 12 &&
+              index != 15 && index != 16 && index != 17 && index != 18 && index != 19 )
+    {
+      this.props.navigation.navigate('lift');
+    }
+      
+      
   }
 
-  gotoActionSpace = () => {
+  gotoTaskWindows = () => {
     this.props.navigation.navigate('questions');
     this.setState({gameStart: false});
-    this.state.goods[0].respond = true;
-    this.state.goods[1].respond = true;
-    this.state.goods[2].respond = true;
+    this.state.basePlaces[15].respond = true;
     this.forceUpdate();
   }
 
@@ -240,9 +312,19 @@ class ActionSpace extends Component {
               W={150}
               H={80}
               onPress={() => {
-                this.gotoActionSpace();
+                this.gotoTaskWindows();
               }}
             />
+          </View>
+        );
+      else return;
+    };
+
+    const basketZone = () => {
+      if (this.state.gameEnd == false)
+        return (
+          <View 
+          style={ styles.basket}>
           </View>
         );
       else return;
@@ -254,6 +336,8 @@ class ActionSpace extends Component {
       defaultSource={this.state.imageBack}
       style={styles.image}>
         
+        {basketZone()}
+
         {this.dataDrag.map((d, index) => (
           <Animated.View
             key={index}
@@ -265,13 +349,16 @@ class ActionSpace extends Component {
             ]}
           >
             <TouchableOpacity onPress={() => { this.changeLocation(index); }}>
-              <Image source={this.state.goods[index].thing} style={styles.image}></Image>
+              <Image source={this.state.basePlaces[index].base} style={styles.image}></Image>
+              <Image source={this.state.basePlaces[index].hint} style={styles.hint}></Image>
             </TouchableOpacity>
           </Animated.View>
         ))}
 
-      {buttonShow()}
-      {imageShowOpen()}    
+  
+
+      {/* {buttonShow()} */}
+      {/* {imageShowOpen()}     */}
       
       </ImageBackground>
     );
@@ -284,6 +371,21 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     width: "100%",
+  },
+  hint: {
+    position: 'absolute',
+    top: 5, left: 20,
+    height: 60,
+    width: 60,
+  },
+  basket: {
+    position: 'absolute',
+    right: 10,
+    top: 50,
+    height: screen.height/2.5,
+    width: 65,
+    backgroundColor: "rgba(255,255,255,0.3)",
+    borderRadius: 10,
   },
   draggableContainer: {
     position: "absolute",

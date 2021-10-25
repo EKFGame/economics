@@ -12,6 +12,8 @@ import WebToCheck from "./screens/WebToCheck";
 import Lift from "./screens/navigation/lift";
 import ActionSpace from "./screens/navigation/actionSpace";
 import Questions from "./screens/Questions";
+import Wellcome from "./screens/navigation/Wellcome";
+import CityPlace from "./screens/navigation/cityPlace";
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -66,6 +68,16 @@ class App extends Component {
           <Stack.Screen
             name="questions"
             component={Questions}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="wellcome"
+            component={Wellcome}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="cityPlace"
+            component={CityPlace}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

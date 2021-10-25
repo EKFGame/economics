@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
-import NavBase from "./NavigationBase";
 import Button from "../../components/Button";
 
 const screen = Dimensions.get("window");
@@ -17,6 +16,7 @@ const umbrela = require("../../images/umbrela.png"); //3
 const tablet = require("../../images/tablet.png"); //5
 const card = require("../../images/card.png"); //4
 const abacus = require("../../images/abacus.png"); //2
+const city = require("../../images/vilniuscity.jpg");
 
 class ActionSpace extends Component {
   constructor(props) {
@@ -27,12 +27,14 @@ class ActionSpace extends Component {
     this.pan = this.dataDrag.map(() => new Animated.ValueXY({x: 0, y: -sizeofy/0.1}));
 
     this.state = {
-      //imageBack: require("../../images/liftfull.png"),
-      imageBack: require("../../images/space.jpg"),
+      imageBack: require("../../images/liftfull.png"),
+      //imageBack: require("../../images/space.jpg"),
       showDorsStart: true,
       gameStart: false,
       gameEnd: false,
+      goToCityShow: false,
       doors: require("../../images/liftfull.png"),
+      fadeInImage: new Animated.Value(0),
 
       basePlaces : {
         0: { base: cubegrey, posx: -sizeofx/1.5, posy: 0, respond: false },
@@ -51,7 +53,7 @@ class ActionSpace extends Component {
         13: { base: cubegrey, posx: 0-25, posy: -sizeofy/0.1, respond: false },
         14: { base: cubegrey, posx: sizeofx/1.5-50, posy: -sizeofy/0.1, respond: false },
 
-        15: { hint: paratute, posx: sizeofx-40, posy: -sizeofy+60, respond: true, used: false },
+        15: { hint: paratute, posx: sizeofx-40, posy: -sizeofy+60, respond: false, used: false },
         16: { hint: abacus, posx: sizeofx-40, posy: -sizeofy+120, respond: false, used: false },
         17: { hint: umbrela, posx: sizeofx-40, posy: -sizeofy+180, respond: false, used: false },
         18: { hint: card, posx: sizeofx-40, posy: -sizeofy+240, respond: false, used: false },
@@ -107,6 +109,12 @@ class ActionSpace extends Component {
     }, 2800);
   };
 
+  navigateToWeb = (webNumber) => {
+    setTimeout(() => {
+    this.props.navigation.navigate('taskScreen', {numberToPass: webNumber});
+    }, 500);
+  }
+
   getPanResponder(index) {
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -135,6 +143,7 @@ class ActionSpace extends Component {
   endGame = () => {
     this.setState({gameEnd: true});
     this.forceUpdate();
+    this.setState({goToCityShow: true});
   }
 
   changeLocation = (index) => {
@@ -145,8 +154,6 @@ class ActionSpace extends Component {
     let posOfX = 0;
     let posOfy = 0;
     let moveIn = false;
-
-    let goToLift = false;
 
     if (this.state.basePlaces[index].respond == true) {
 
@@ -199,6 +206,7 @@ class ActionSpace extends Component {
         pointOfMove = 0;
         this.state.basePlaces[16].respond = true;
         this.movePanObject(15, sizeofx+10);
+        this.navigateToWeb(0);
       }
 
       if(index == 4 && this.state.basePlaces[16].used == true){
@@ -206,6 +214,7 @@ class ActionSpace extends Component {
         pointOfMove = 3;
         this.state.basePlaces[17].respond = true;
         this.movePanObject(16, sizeofx+10);
+        this.props.navigation.navigate('taskScreen', {numberToPass: 1});
       }
 
       if(index == 8 && this.state.basePlaces[17].used == true == true){
@@ -213,6 +222,7 @@ class ActionSpace extends Component {
         pointOfMove = 6;
         this.state.basePlaces[18].respond = true;
         this.movePanObject(17, sizeofx+10);
+        this.props.navigation.navigate('taskScreen', {numberToPass: 2});
       }
 
       if(index == 10 && this.state.basePlaces[18].used == true == true ){
@@ -220,6 +230,7 @@ class ActionSpace extends Component {
         pointOfMove = 9;
         this.state.basePlaces[19].respond = true;
         this.movePanObject(18, sizeofx+10);
+        this.props.navigation.navigate('taskScreen', {numberToPass: 3});
       }
 
       if(index == 12 && this.state.basePlaces[19].used == true == true){
@@ -227,6 +238,7 @@ class ActionSpace extends Component {
         pointOfMove = 12;
         this.movePanObject(19, sizeofx+10);
         this.endGame();
+        this.props.navigation.navigate('taskScreen', {numberToPass: 4});
       }
 
     }
@@ -288,6 +300,18 @@ class ActionSpace extends Component {
     this.forceUpdate();
   }
 
+  goToCityPlace = () => {
+    this.props.navigation.navigate('cityPlace');
+  }
+
+  fadeIn = () => {
+    Animated.timing(this.state.fadeInImage, {
+      toValue: 1,
+      duration: 5000,
+      useNativeDriver: true,
+    }).start();
+  };
+
   render() {
 
     const imageShowOpen = () => {
@@ -302,6 +326,37 @@ class ActionSpace extends Component {
       else return;
     };
     
+    const goToCityShow = () => {
+      if (this.state.goToCityShow == true) {
+        this.fadeIn();
+        return (
+          <View style={{flex: 1}}>
+          <Animated.Image
+            style={[styles.imageCity, { opacity: this.state.fadeInImage }]}
+            source={city}
+            resizeMode="stretch"
+          
+          
+          
+          />
+
+          <View style={styles.cityButtonplace}>
+            <Button
+              color="rgba(0,0,255,0.7)"
+              title="Keliauti į miestą!"
+              W={300}
+              H={80}
+              onPress={() => {
+                this.goToCityPlace();
+              }}
+            />
+          </View>
+
+          </View>
+        );}
+      else return;
+    };
+
     const buttonShow = () => {
       if (this.state.gameStart == true)
         return (
@@ -357,8 +412,9 @@ class ActionSpace extends Component {
 
   
 
-      {/* {buttonShow()} */}
-      {/* {imageShowOpen()}     */}
+      {buttonShow()}
+      {imageShowOpen()}
+      {goToCityShow()}    
       
       </ImageBackground>
     );
@@ -371,6 +427,10 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     width: "100%",
+  },
+  imageCity: {
+    height: '100%',
+    width: '100%',
   },
   hint: {
     position: 'absolute',
@@ -396,5 +456,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 60,
     right: screen.width/2 - 85,
+  },
+  cityButtonplace: {
+    position: "absolute",
+    bottom: 150,
+    right: screen.width/2 - 160,
+  },
+  fadingContainer: {
+    padding: 20,
+    backgroundColor: "powderblue"
   },
 });

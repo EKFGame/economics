@@ -58,14 +58,17 @@ class TaskScreen extends Component {
   Data = "jdlajslkjalskd";
 
   render() {
+    
+    const { numberToPass } = this.props.route.params;
+    
     return (
       <View style={{ flex: 1, top: 30 }}>
         <StatusBar style="auto" />
         <View style={{ flex: 1.5 }}>
-          <WebBrowser outsideuri={DataTasks[1].uri} />
+          <WebBrowser outsideuri={DataTasks[numberToPass].uri} />
         </View>
         <View style={{ flex: 1 }}>
-          <Task DataToShow={DataTasks[1]} navigation={this.props.navigation} />
+          <Task DataToShow={DataTasks[numberToPass]} navigation={this.props.navigation} />
         </View>
       </View>
     );

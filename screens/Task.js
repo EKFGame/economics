@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import ButtonMy from "../components/Button";
+import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 
 class Task extends Component {
@@ -21,16 +21,14 @@ class Task extends Component {
     this.setState({ answer2 });
   }
 
-  handleSubmitGo = () => {
-    this.props.navigation.navigate("startPlace");
+  backToActionSpace = () => {
+    this.props.navigation.navigate("actionSpace");
   }
 
   render() {
 
     return (
       <View style={styles.container}>
-        
-        
         <Text style={styles.questionText}>
           {this.props.DataToShow.question1}
         </Text>
@@ -47,11 +45,13 @@ class Task extends Component {
             onChangeText={(text) => this.answer2Change(text)}
         />
 
-        <ButtonMy
-          color="darkgreen"
-          title="Navigate"
+        <Button
+          color="rgba(30,194,228,0.7)"
+          title="Atsakyti"
+          W={150}
+          H={40}
           onPress={() => {
-            this.handleSubmitGo();
+            this.backToActionSpace();
           }}
         />
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
-    backgroundColor: "#4eb15b",
+    backgroundColor: "#2c75b7",
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 25,

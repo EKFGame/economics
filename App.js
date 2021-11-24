@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, BackAndroid } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import StartPlace from "./screens/StartPlace";
+
 import TaskScreen from "./screens/TaskScreen";
 import Task from "./screens/Task";
 import Outside from "./screens/navigation/OutSide";
@@ -14,6 +14,9 @@ import ActionSpace from "./screens/navigation/actionSpace";
 import Questions from "./screens/Questions";
 import Wellcome from "./screens/navigation/Wellcome";
 import CityPlace from "./screens/navigation/cityPlace";
+import Registration from "./screens/Registration";
+import FinancesTwo from "./screens/FinancesTwo";
+
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -23,12 +26,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="actionSpace">
-          <Stack.Screen
-            name="startPlace"
-            component={StartPlace}
-            options={{ headerShown: false }}
-          />
+        <Stack.Navigator initialRouteName="financestwo">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}
@@ -78,6 +76,16 @@ class App extends Component {
           <Stack.Screen
             name="cityPlace"
             component={CityPlace}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="registration"
+            component={Registration}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="financestwo"
+            component={FinancesTwo}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

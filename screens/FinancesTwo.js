@@ -11,7 +11,7 @@ const pyramidImage = require("../images/pyramidthree.jpg");
 export default function FinancesTwo({ navigation: { navigate }}) {
 
   const [squareAns, setSquareAns] = useState(['','','','','','']);
-  const [Areashow, setAreaShow] = useState(2);
+  const [Areashow, setAreaShow] = useState(1);
   const [ques, setques] = useState(1);
   const [QuestionPrev, setQuestionPrev] = useState();
   const [QnAPrev, setQnAPrev] = useState();

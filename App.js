@@ -27,7 +27,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="accounting">
+        <Stack.Navigator initialRouteName="financestwo">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}

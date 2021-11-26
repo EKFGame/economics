@@ -112,12 +112,29 @@ export default function FinancesTwo({ navigation: { navigate }}) {
     // }
 
     if (squareAns[0] == '5' && squareAns[1] == '3' && squareAns[2] == '4' && squareAns[3] == '2' && squareAns[4] == '6' && squareAns[5] == '1') {
-        console.log('praejo');
+        
+        Alert.alert(
+            "Atsakymai teisingi!",
+            "", [{ text: "Gerai", onPress:() => goToSpace()}],
+            { cancelable: false }
+        );
+
+    } else {
+
+        Alert.alert(
+            "Ne visi atsakymai yra teisingi!",
+            "", [{ text: "Gerai" }],
+            { cancelable: false }
+        );
+
     }
     
   }
     
-  
+  const goToSpace = () => {
+      console.log('praejo');
+  }
+
   const showPyramid = () => {
     setAreaShow(2);
   }
@@ -157,7 +174,7 @@ export default function FinancesTwo({ navigation: { navigate }}) {
       setques(prev=>prev + 2)
       Alert.alert(
         "Atsakymai teisingi!",
-        "", [{ text: "Gerai", onPress:() => showPyramid()}],
+        "Pabandykime sunkesnį uždavinį išspręsti..", [{ text: "Gerai", onPress:() => showPyramid()}],
         { cancelable: false }
         );
       

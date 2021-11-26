@@ -1,9 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput } from "react-native";
-import Button from "../components/Button";
+import { Dimensions, Alert ,StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput } from "react-native";
 
 const imageBack = require("../images/space.jpg");
+
+const screen = Dimensions.get("window");
 
 const Letters = [
     ['Q','S','U','O','S','V','S','W','Z','G','S','Z','U','F','L'],
@@ -29,15 +30,11 @@ class Accounting extends Component {
     super(props);
     this.state = {
       
-      auditas: false,
-      buhalteris: false,
-      mokesciai: false,
-      pelnas: false,
-      sanaudos: false,
-      debetas: false,
-      saskaita: false,
-      pajamos: false,
-      balansas: false,
+        allOfWord: false,
+        
+        stateOfFounds : [
+            [false, false, false, false, false, false, false, false, false, false ],
+        ],
 
         stateOfButton : [
             ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
@@ -70,6 +67,7 @@ class Accounting extends Component {
     
     this.CheckWordsWithTrue();
     
+    this.CheckState();
     setTimeout(() => {
         this.forceUpdate();
     }, 50);
@@ -80,65 +78,159 @@ class Accounting extends Component {
   CheckWordsWithTrue = () => {
     
     if(this.state.stateOfButton[6][1] == 'orange' && this.state.stateOfButton[7][1] == 'orange' && this.state.stateOfButton[8][1] == 'orange'  && this.state.stateOfButton[9][1] == 'orange'  && this.state.stateOfButton[10][1] == 'orange'  && this.state.stateOfButton[11][1] == 'orange'  && this.state.stateOfButton[12][1] == 'orange' ) {
-        this.setState({auditas: true});
-        console.log('praejo - 1 ');
+        this.state.stateOfFounds[0] = true;
+        this.state.stateOfButton[6][1] = 'green';
+     // this.state.stateOfButton[7][1] = 'green';
+        this.state.stateOfButton[8][1] = 'green';
+        this.state.stateOfButton[9][1] = 'green';
+        this.state.stateOfButton[10][1] = 'green';
+        this.state.stateOfButton[11][1] = 'green';
+        this.state.stateOfButton[12][1] = 'green';
+
+        if (this.state.stateOfFounds[8] == true){ this.state.stateOfButton[7][1] = 'green'; }
     }
 
     if(this.state.stateOfButton[13][2] == 'orange' && this.state.stateOfButton[13][3] == 'orange' && this.state.stateOfButton[13][4] == 'orange' && this.state.stateOfButton[13][5] == 'orange'  && this.state.stateOfButton[13][6] == 'orange'  && this.state.stateOfButton[13][7] == 'orange'  && this.state.stateOfButton[13][8] == 'orange'  && this.state.stateOfButton[13][9] == 'orange'  && this.state.stateOfButton[13][10] == 'orange'  && this.state.stateOfButton[13][11] == 'orange' ) {
-        this.setState({buhalteris: true});
-        console.log('praejo - 2 ');
+        this.state.stateOfFounds[1] = true;
+        this.state.stateOfButton[13][2] = 'green';
+        this.state.stateOfButton[13][3] = 'green';
+        this.state.stateOfButton[13][4] = 'green';
+        this.state.stateOfButton[13][5] = 'green';
+        this.state.stateOfButton[13][6] = 'green';
+        this.state.stateOfButton[13][7] = 'green';
+        this.state.stateOfButton[13][8] = 'green';
+        this.state.stateOfButton[13][9] = 'green';
+        this.state.stateOfButton[13][10] = 'green';
+        this.state.stateOfButton[13][11] = 'green';
     }
 
     if(this.state.stateOfButton[10][4] == 'orange' && this.state.stateOfButton[10][5] == 'orange' && this.state.stateOfButton[10][6] == 'orange'  && this.state.stateOfButton[10][7] == 'orange'  && this.state.stateOfButton[10][8] == 'orange'  && this.state.stateOfButton[10][9] == 'orange'  && this.state.stateOfButton[10][10] == 'orange' && this.state.stateOfButton[10][11] == 'orange' && this.state.stateOfButton[10][12] == 'orange' ) {
-        this.setState({mokesciai: true});
-        console.log('praejo - 3 ');
+        this.state.stateOfFounds[2] = true;
+        this.state.stateOfButton[10][4] = 'green';
+        this.state.stateOfButton[10][5] = 'green'; 
+        this.state.stateOfButton[10][6] = 'green'; 
+        this.state.stateOfButton[10][7] = 'green'; 
+        this.state.stateOfButton[10][8] = 'green'; 
+        this.state.stateOfButton[10][9] = 'green';
+        this.state.stateOfButton[10][10] = 'green';
+        this.state.stateOfButton[10][11] = 'green';
+        this.state.stateOfButton[10][12] = 'green';
     }
 
     if(this.state.stateOfButton[2][1] == 'orange' && this.state.stateOfButton[2][2] == 'orange' && this.state.stateOfButton[2][3] == 'orange'  && this.state.stateOfButton[2][4] == 'orange'  && this.state.stateOfButton[2][5] == 'orange'  && this.state.stateOfButton[2][6] == 'orange'){
-        this.setState({pelnas: true});
-        console.log('praejo - 4 ');
+        this.state.stateOfFounds[3] = true;
+        this.state.stateOfButton[2][1] = 'green';
+        this.state.stateOfButton[2][2] = 'green';
+        this.state.stateOfButton[2][3] = 'green';
+        this.state.stateOfButton[2][4] = 'green';
+        this.state.stateOfButton[2][5] = 'green';
+        this.state.stateOfButton[2][6] = 'green';
     }
 
     if(this.state.stateOfButton[4][2] == 'orange' && this.state.stateOfButton[4][3] == 'orange' && this.state.stateOfButton[4][4] == 'orange' && this.state.stateOfButton[4][5] == 'orange'  && this.state.stateOfButton[4][6] == 'orange'  && this.state.stateOfButton[4][7] == 'orange'  && this.state.stateOfButton[4][8] == 'orange'  && this.state.stateOfButton[4][9] == 'orange' ) {
-        this.setState({sanaudos: true});
-        console.log('praejo - 5 ');
+        this.state.stateOfFounds[4] = true;
+        this.state.stateOfButton[4][2] = 'green';
+        this.state.stateOfButton[4][3] = 'green';
+        this.state.stateOfButton[4][4] = 'green';
+        this.state.stateOfButton[4][5] = 'green';
+        this.state.stateOfButton[4][6] = 'green';
+        this.state.stateOfButton[4][7] = 'green';
+        this.state.stateOfButton[4][8] = 'green';
+        this.state.stateOfButton[4][9] = 'green';
     }
 
     if(this.state.stateOfButton[3][13] == 'orange' && this.state.stateOfButton[4][13] == 'orange' && this.state.stateOfButton[5][13] == 'orange'  && this.state.stateOfButton[6][13] == 'orange'  && this.state.stateOfButton[7][13] == 'orange'  && this.state.stateOfButton[8][13] == 'orange'  && this.state.stateOfButton[9][13] == 'orange' ) {
-        this.setState({debetas: true});
-        console.log('praejo - 6 ');
+        this.state.stateOfFounds[5] = true;
+        this.state.stateOfButton[3][13] = 'green';
+        this.state.stateOfButton[4][13] = 'green';
+        this.state.stateOfButton[5][13] = 'green';
+        this.state.stateOfButton[6][13] = 'green';
+        this.state.stateOfButton[7][13] = 'green';
+        this.state.stateOfButton[8][13] = 'green';
+        this.state.stateOfButton[9][13] = 'green';
     }
 
     if(this.state.stateOfButton[8][3] == 'orange' && this.state.stateOfButton[8][4] == 'orange' && this.state.stateOfButton[8][5] == 'orange'  && this.state.stateOfButton[8][6] == 'orange'  && this.state.stateOfButton[8][7] == 'orange'  && this.state.stateOfButton[8][8] == 'orange'  && this.state.stateOfButton[8][9] == 'orange'  && this.state.stateOfButton[8][10] == 'orange' ) {
-        this.setState({saskaita: true});
-        console.log('praejo - 7 ');
+        this.state.stateOfFounds[6] = true;
+        this.state.stateOfButton[8][3] = 'green';
+        this.state.stateOfButton[8][4] = 'green';
+        this.state.stateOfButton[8][5] = 'green';
+        this.state.stateOfButton[8][6] = 'green';
+        this.state.stateOfButton[8][7] = 'green';
+        this.state.stateOfButton[8][8] = 'green';
+        this.state.stateOfButton[8][9] = 'green';
+        this.state.stateOfButton[8][10] = 'green';
     }
 
     if(this.state.stateOfButton[2][11] == 'orange' && this.state.stateOfButton[3][11] == 'orange' && this.state.stateOfButton[4][11] == 'orange' && this.state.stateOfButton[5][11] == 'orange'  && this.state.stateOfButton[6][11] == 'orange'  && this.state.stateOfButton[7][11] == 'orange'  && this.state.stateOfButton[8][11] == 'orange' ) {
-        this.setState({pajamos: true});
-        console.log('praejo - 8 ');
+        this.state.stateOfFounds[7] = true;
+        this.state.stateOfButton[2][11] = 'green';
+        this.state.stateOfButton[3][11] = 'green';
+        this.state.stateOfButton[4][11] = 'green';
+        this.state.stateOfButton[5][11] = 'green';
+        this.state.stateOfButton[6][11] = 'green';
+        this.state.stateOfButton[7][11] = 'green';
+        this.state.stateOfButton[8][11] = 'green';
     }
 
     if(this.state.stateOfButton[7][0] == 'orange' && this.state.stateOfButton[7][1] == 'orange' && this.state.stateOfButton[7][2] == 'orange'  && this.state.stateOfButton[7][3] == 'orange'  && this.state.stateOfButton[7][4] == 'orange'  && this.state.stateOfButton[7][5] == 'orange'  && this.state.stateOfButton[7][6] == 'orange' && this.state.stateOfButton[7][7] == 'orange') {
-        this.setState({balansas: true});
-        console.log('praejo - 9 ');
+        this.state.stateOfFounds[8] = true;
+        this.state.stateOfButton[7][0] = 'green';
+    //  this.state.stateOfButton[7][1] = 'green';
+        this.state.stateOfButton[7][2] = 'green';
+        this.state.stateOfButton[7][3] = 'green';
+        this.state.stateOfButton[7][4] = 'green';
+        this.state.stateOfButton[7][5] = 'green';
+        this.state.stateOfButton[7][6] = 'green';
+        this.state.stateOfButton[7][7] = 'green';
+
+        if (this.state.stateOfFounds[0] == true) { this.state.stateOfButton[7][1] = 'green'; }
     }
-    
-    
+   
   }
 
-  CheckState = () => {
-    console.log(this.state.stateOfButton[0][0] + ' patikrinti button');
+  goToSpace = () => {
+      console.log('isejimas');
   }
+
+    CheckState = () => {
+        
+        let counter = 0;
+
+        for (let i = 0; i < 10; i++) {
+        if (this.state.stateOfFounds[i] == true) {
+            counter++;
+        }
+        }
+
+        if (counter == 9) {
+        
+            Alert.alert(
+                "Atsakymai teisingi!",
+                "", [{ text: "Gerai", onPress:() => this.goToSpace()}],
+                { cancelable: false }
+            );
+
+        }
+
+        counter = 0;
+
+    }
 
   render() {
 
     const ButtonWithLetter = (line, item) => {
 
+        let finded = false;
+
+        if (this.state.stateOfButton[line][item] == 'green') {
+            finded = true;
+        }
+
         return (
             <TouchableOpacity
             style={styles.button}
-            disabled={false}
+            disabled={finded}
             onPress={() => this.changeState(line, item)}
             >
             <View style={[styles.buttonBackground, {backgroundColor: this.state.stateOfButton[line][item] }]}>
@@ -152,8 +244,14 @@ class Accounting extends Component {
 
     const wordToFind = (word, state) => {
 
+        let lineOAns = 'none';
+
+        if (this.state.stateOfFounds[state] == true) {
+            lineOAns = 'line-through';
+        }
+
         return (
-            <Text style={[styles.wordToFindText, {textDecorationLine: 'line-through'}]} > {word} </Text>
+            <Text style={[styles.wordToFindText, {textDecorationLine: lineOAns}]} > {word} </Text>
         );
         
     };
@@ -163,32 +261,33 @@ class Accounting extends Component {
         source={imageBack}
         style={styles.image}
       >
-        <View style={{flex: 1.25}}>
+        <View style={{flex: 1.75}}>
         <Text style={styles.headerOfLetter}> Buhalterinės apskaitos kryžiažodyje yra paslėpti 9 žodžiai, suraskite ir pažymėkite juos.  </Text>
         </View>
         
-        <View style={{flex: 1.25, flexDirection: 'row', backgroundColor: 'green'}}>
+        <View style={styles.wordsToFindArea}>
             
             <View style={{flex: 1, justifyContent: 'center'}}>
-                {wordToFind('AUDITAS', 1)}
-                {wordToFind('BUHALTERIS', 2)}
-                {wordToFind('MOKESČIAI', 3)}
+                {wordToFind('AUDITAS', 0)}
+                {wordToFind('BUHALTERIS', 1)}
+                {wordToFind('MOKESČIAI', 2)}
             </View>
             
             <View style={{flex: 1, justifyContent: 'center'}}>
-                {wordToFind('PELNAS', 4)}
-                {wordToFind('SĄNAUDOS', 5)}
-                {wordToFind('DEBETAS', 6)}
+                {wordToFind('PELNAS', 3)}
+                {wordToFind('SĄNAUDOS', 4)}
+                {wordToFind('DEBETAS', 5)}
             </View>
             
             <View style={{flex: 1, justifyContent: 'center'}}>
-                {wordToFind('SĄSKAITA', 7)}
-                {wordToFind('PAJAMOS', 8)}
-                {wordToFind('BALANSAS', 9)}
+                {wordToFind('SĄSKAITA', 6)}
+                {wordToFind('PAJAMOS', 7)}
+                {wordToFind('BALANSAS', 8)}
             </View>
         </View>
         
         <View style={ [styles.gameArea, {flex: 4.5, }]}>
+            
             <View style={{flexDirection: 'row'}}>
             {ButtonWithLetter(0,0)}{ButtonWithLetter(0,1)}{ButtonWithLetter(0,2)}{ButtonWithLetter(0,3)}{ButtonWithLetter(0,4)}
             {ButtonWithLetter(0,5)}{ButtonWithLetter(0,6)}{ButtonWithLetter(0,7)}{ButtonWithLetter(0,8)}{ButtonWithLetter(0,9)}
@@ -264,23 +363,11 @@ class Accounting extends Component {
             {ButtonWithLetter(14,5)}{ButtonWithLetter(14,6)}{ButtonWithLetter(14,7)}{ButtonWithLetter(14,8)}{ButtonWithLetter(14,9)}
             {ButtonWithLetter(14,10)}{ButtonWithLetter(14,11)}{ButtonWithLetter(14,12)}{ButtonWithLetter(14,13)}{ButtonWithLetter(14,14)}
             </View>
-               
-        
-        
-        
         
         </View>
         
-        <View style={{flex: 1}}>
-            <Button
-                color="rgba(1,48,90,0.8)"
-                title="Pasitikrinti"
-                W={400}
-                H={80}
-                onPress={() => {
-                    this.CheckState();
-                }}
-            />
+        <View style={{flex: 0.5}}>
+
         </View>
 
       </ImageBackground>
@@ -310,7 +397,7 @@ const styles = StyleSheet.create({
   },
   wordToFindText: {
     margin: 3,
-    fontSize: 15,
+    fontSize: screen.width / 29,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
@@ -321,8 +408,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#DDDDDD",
   },
   buttonBackground: {
-    width: 28,
-    height: 28,
+    width: screen.width / 15.5,
+    height: screen.width /15.5,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'black',
@@ -331,8 +418,17 @@ const styles = StyleSheet.create({
   gameArea: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'dodgerblue',
+    backgroundColor: 'rgba(1,48,90,0.9)',
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
+  wordsToFindArea: {
+    flex: 1.25,
+    flexDirection: 'row',
+    backgroundColor: 'rgba(1,48,90,0.9)',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },    
 });
 
 export default Accounting;

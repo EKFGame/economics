@@ -17,6 +17,7 @@ import CityPlace from "./screens/navigation/cityPlace";
 import Registration from "./screens/Registration";
 import FinancesTwo from "./screens/FinancesTwo";
 import Accounting from "./screens/Accounting";
+import Bussiness from "./screens/Bussiness";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="financestwo">
+        <Stack.Navigator initialRouteName="actionSpace">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}
@@ -92,6 +93,11 @@ class App extends Component {
           <Stack.Screen
             name="accounting"
             component={Accounting}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="bussiness"
+            component={Bussiness}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

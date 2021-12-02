@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Text, Dimensions, TouchableOpacity, Image } from "react-native";
 import NavBase from "./NavigationBase";
 
-const IMAGE = require("../../images/inside.jpg");
-const IMAGE_WIDTH = 4595;
-const IMAGE_HEIGHT = 1269;
+const IMAGE = require("../../images/insideph.jpg");
+const IMAGE_WIDTH = 3532;
+const IMAGE_HEIGHT = 1607;
 const screen = Dimensions.get("window");
 
 class Inside extends Component {
@@ -41,13 +41,13 @@ class Inside extends Component {
             this.navigateToLift();
           }}
           style={{
-            backgroundColor: "rgba(255,255,255,0.3)",
+            backgroundColor: "rgba(255,255,255,0.6)",
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(510),
-            left: this.resizeWidth(3820),
-            width: this.resizeWidth(250),
-            height: this.resizeHeight(380),
+            top: this.resizeHeight(1010),
+            left: this.resizeWidth(2950),
+            width: this.resizeWidth(200),
+            height: this.resizeHeight(300),
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -67,7 +67,46 @@ class Inside extends Component {
           style={{
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(1050),
+            top: this.resizeHeight(1350),
+            left: this.resizeWidth(1000),
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            padding: 10,
+            position: "absolute",
+            top: this.resizeHeight(1350),
+            left: this.resizeWidth(1300),
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            padding: 10,
+            position: "absolute",
+            top: this.resizeHeight(1350),
+            left: this.resizeWidth(1600),
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={{
+            padding: 10,
+            position: "absolute",
+            top: this.resizeHeight(1350),
             left: this.resizeWidth(1900),
             justifyContent: "center",
             alignItems: "center",
@@ -80,7 +119,7 @@ class Inside extends Component {
           style={{
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(1050),
+            top: this.resizeHeight(1350),
             left: this.resizeWidth(2200),
             justifyContent: "center",
             alignItems: "center",
@@ -93,7 +132,7 @@ class Inside extends Component {
           style={{
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(1050),
+            top: this.resizeHeight(1350),
             left: this.resizeWidth(2500),
             justifyContent: "center",
             alignItems: "center",
@@ -106,47 +145,8 @@ class Inside extends Component {
           style={{
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(1050),
-            left: this.resizeWidth(2800),
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            position: "absolute",
-            top: this.resizeHeight(1050),
-            left: this.resizeWidth(3100),
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            position: "absolute",
-            top: this.resizeHeight(1050),
-            left: this.resizeWidth(3400),
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight}}></Image>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            position: "absolute",
-            top: this.resizeHeight(1025),
-            left: this.resizeWidth(3650),
+            top: this.resizeHeight(1325),
+            left: this.resizeWidth(2750),
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -154,18 +154,18 @@ class Inside extends Component {
           <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight, transform: [{rotate: '340deg'}]}}></Image>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             padding: 10,
             position: "absolute",
-            top: this.resizeHeight(930),
-            left: this.resizeWidth(3800),
+            top: this.resizeHeight(1230),
+            left: this.resizeWidth(2900),
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <Image source={this.state.arrow} style={{width: this.state.arrowWidth, height: this.state.arrowHeight, transform: [{rotate: '310deg'}]}}></Image>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </NavBase>
     );
   }

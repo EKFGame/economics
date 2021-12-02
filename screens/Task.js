@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 
@@ -10,6 +10,8 @@ class Task extends Component {
     this.state = {
       answer1: "",
       answer2: "",
+      answer1color: "white",
+      answer2color: "white",
     };
   }
 
@@ -21,9 +23,41 @@ class Task extends Component {
     this.setState({ answer2 });
   }
 
-  backToActionSpace = () => {
+  goToActionSpace = () => {
     this.props.navigation.navigate("actionSpace");
   }
+
+  checkAns = () => {
+
+    if (this.props.DataToShow.answer1 != this.state.answer1) {
+      this.setState({answer1color: 'red'});
+    }
+    
+    if (this.props.DataToShow.answer2 != this.state.answer2) {
+      this.setState({answer2color: 'red'});
+    }
+
+    if (this.props.DataToShow.answer1 == this.state.answer1) {
+      this.setState({answer1color: 'white'});
+    }
+    
+    if (this.props.DataToShow.answer2 == this.state.answer2) {
+      this.setState({answer2color: 'white'});
+    }
+
+    if (this.props.DataToShow.answer2 == this.state.answer2 && this.props.DataToShow.answer1 == this.state.answer1){
+      
+      Alert.alert(
+        "Atsakymai teisingi!",
+        "", [{ text: "Gerai", onPress:() => this.goToActionSpace()}],
+        { cancelable: false }
+      );
+      
+    }
+
+  }
+
+  
 
   render() {
 
@@ -35,6 +69,9 @@ class Task extends Component {
         <TextInput
           title="Skaičius:"
           value={this.state.answer1}
+          ktype='numeric'
+          bgcolor={this.state.answer1color}
+          maxLength={2}
           onChangeText={(text) => this.answer1Change(text)}
         />
 
@@ -42,6 +79,8 @@ class Task extends Component {
         <TextInput
             title="Kodas:"
             value={this.state.answer2}
+            bgcolor={this.state.answer2color}
+            maxLength={9}
             onChangeText={(text) => this.answer2Change(text)}
         />
 
@@ -51,7 +90,7 @@ class Task extends Component {
           W={150}
           H={40}
           onPress={() => {
-            this.backToActionSpace();
+            this.checkAns();
           }}
         />
 

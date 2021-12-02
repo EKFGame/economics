@@ -1,39 +1,49 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 
 const imageBack = require("../images/space.jpg");
-
-export default function Questions({ navigation: { navigate }}) {
+const screen = Dimensions.get("window");
+export default function Bussiness({ navigation: { navigate }}) {
 
   const [ques, setques] = useState(1);
   const [QuestionPrev, setQuestionPrev] = useState();
   const [QnAPrev, setQnAPrev] = useState();
   const [Question, setQuestion] = useState([
-    { text: 'Kokiame mieste yra Vilniaus Kolegija?', key: '1' },
-    { text: 'Kokioje gatvėje yra Ekonomikos fakultetas?', key: '2' },
-    { text: 'Kiek studijų programų yra EKF?', key: '3' },
+    { text: 'Verslininkais netampama, verslininkais gimstama?', key: '1' },
+    { text: 'Verslo lyderiams svarbiausia ilgalaikės perspektyvos, o ne geri trumpalaikiai rezultatai?', key: '2' },
+    { text: 'Pelnas - tai atlygis verslininkui už jo įgyvendintą idėją?', key: '3' },
+    { text: 'Privati nuosavybė bet kokiomis sąlygomis yra efektyviausia turto valdymo forma?', key: '4' },
+    { text: 'Verslas jo savininkui suteikia galimybę gyventi taip, kaip nori?', key: '5' },
+    { text: 'Kai šešėlinis verslas plečiasi valstybės pajamos santykinai didėja?', key: '6' },
     
   ]);
   const [QnA, setQnA] = useState([
     //1
-    { text: 'Vilniuje', key: '1', question: '1', answer: 'true' },
-    { text: 'Kaune', key: '2', question: '1', answer: 'false' },
-    { text: 'Klaipėdoje', key: '3', question: '1', answer: 'false' },
+    { text: 'Taip', key: '1', question: '1', answer: 'false' },
+    { text: 'Ne', key: '2', question: '1', answer: 'true' },
     //2
-    { text: 'Studentų g.', key: '4', question: '2', answer: 'true' },
-    { text: 'Kalvarijų g.', key: '5', question: '2', answer: 'false' },
-    { text: 'Gedimino pr.', key: '6', question: '2', answer: 'false' },
+    { text: 'Taip', key: '3', question: '2', answer: 'true' },
+    { text: 'Ne', key: '4', question: '2', answer: 'false' },
     //3
-    { text: '3', key: '7', question: '3', answer: 'false' },
-    { text: '6', key: '8', question: '3', answer: 'false' },
-    { text: '5', key: '9', question: '3', answer: 'true' },
+    { text: 'Taip', key: '5', question: '3', answer: 'true' },
+    { text: 'Ne', key: '6', question: '3', answer: 'false' },
+    //4
+    { text: 'Taip', key: '7', question: '4', answer: 'false' },
+    { text: 'Ne', key: '8', question: '4', answer: 'true' },
+    //5
+    { text: 'Taip', key: '9', question: '5', answer: 'false' },
+    { text: 'Ne', key: '10', question: '5', answer: 'true' },
+    //6
+    { text: 'Taip', key: '11', question: '6', answer: 'false' },
+    { text: 'Ne', key: '12', question: '6', answer: 'true' },
 
 
   ]);
   
   const updateStorage = () => {
-    navigate('actionSpace');
+    console.log('done');
+    //navigate('actionSpace');
   }
 
   const filterQuestion = (id, answer) => {
@@ -59,7 +69,7 @@ export default function Questions({ navigation: { navigate }}) {
      }
 
     
-     if(temp==4){ //4
+     if(temp==7){ //4
       setques(prev=>prev + 2)
       Alert.alert(
         "Atsakymai teisingi!",
@@ -102,6 +112,7 @@ export default function Questions({ navigation: { navigate }}) {
             </View>
             <View style={{flex: 1}}>
             <FlatList
+                horizontal={true}
                 data={QnAPrev}
                 renderItem={({ item }) => (
                 <TouchableOpacity onPressOut={() => filterQuestion(ques, item.answer)}>
@@ -131,11 +142,14 @@ const styles = StyleSheet.create({
   item: {
     margin: 10,
     padding: 30,
-    fontSize: 20,
+    fontSize: screen.width / 13,
+    fontWeight: 'bold',
     borderRadius: 15,
     backgroundColor: 'dodgerblue',
     alignItems: 'center',
     textAlign: 'center',
+    height: screen.height / 7,
+    width: screen.width / 2.2,
   },
   header: {
     margin: 5,
@@ -146,6 +160,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     color: 'white',
+    alignItems: 'center',
   },
   image: {
     height: "100%",

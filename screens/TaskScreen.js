@@ -7,43 +7,43 @@ import Task from "./Task";
 const DataTasks = {
   0: {
     question1:
-      "Iš kiek punktų susideda Verslo Ekonomikos studijų programos profesinės veiklos galimybės?",
-    answer1: "13",
-    question2: "Studijų programos kodas?",
+      "Iš kiek žodžių  yra sudaryta Verslo Ekonomikos studijų programos profesinių veiklos galimybių pastraipa?",
+    answer1: "26",
+    question2: "Koks yra šios studijų programos kodas?",
     answer2: "6531JX008",
     uri: "https://www.viko.lt/studijos/studiju-programos/verslo-ekonomika",
   },
   1: {
     question1:
-      "Iš kiek punktų susideda Buhalterinės Apskaitos studijų programos profesinės veiklos galimybės?",
-    answer1: "15",
-    question2: "Studijų programos kodas?",
+      "Iš kiek žodžių  yra sudaryta Buhalterinės Apskaitos studijų programos profesinių veiklos galimybių pastraipa?",
+    answer1: "56",
+    question2: "Koks yra šios studijų programos kodas?",
     answer2: "6531LX038",
     uri: "https://www.viko.lt/studijos/studiju-programos/buhalterine-apskaita",
   },
   2: {
     question1:
-      "Iš kiek punktų susideda Investicijų ir Draudimo studijų programos profesinės veiklos galimybės?",
-    answer1: "19",
-    question2: "Studijų programos kodas?",
+      "Iš kiek žodžių  yra sudaryta Investicijų ir Draudimo studijų programos profesinių veiklos galimybių pastraipa?",
+    answer1: "29",
+    question2: "Koks yra šios studijų programos kodas?",
     answer2: "6531LX040",
     uri: "https://www.viko.lt/studijos/studiju-programos/investicijos-ir-draudimas",
   },
   3: {
     question1:
-      "Iš kiek punktų susideda Bankininkystės studijų programos profesinės veiklos galimybės?",
-    answer1: "13",
-    question2: "Studijų programos kodas?",
+      "Iš kiek žodžių  yra sudaryta Bankininkystės studijų programos profesinių veiklos galimybių pastraipa?",
+    answer1: "18",
+    question2: "Koks yra šios studijų programos kodas?",
     answer2: "6531LX037",
     uri: "https://www.viko.lt/studijos/studiju-programos/bankininkyste",
   },
   4: {
     question1:
-      "Iš kiek punktų susideda Finansų studijų programos profesinės veiklos galimybės?",
-    answer1: "13",
-    question2: "Studijų programos kodas?",
+      "Iš kiek žodžių  yra sudaryta Finansų studijų programos profesinių veiklos galimybių pastraipa?",
+    answer1: "61",
+    question2: "Koks yra šios studijų programos kodas?",
     answer2: "6531LX039",
-    uri: "https://www.viko.lt/studijos/studiju-programos/finansai/#ns2019",
+    uri: "https://www.viko.lt/studijos/studiju-programos/finansai",
   },
 };
 

@@ -287,7 +287,7 @@ class ActionSpace extends Component {
     else if ( index != 1 && index != 4 && index != 8 && index != 10 && index != 12 &&
               index != 15 && index != 16 && index != 17 && index != 18 && index != 19 )
     {
-      this.props.navigation.navigate('lift');
+      //seconds
     }
       
       

@@ -4,49 +4,6 @@ import { Picker, Alert, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 
-const DataTasks = {
-    0: {
-      question1:
-        "Iš kiek žodžių  yra sudaryta Verslo Ekonomikos studijų programos profesinių veiklos galimybių pastraipa?",
-      answer1: "26",
-      question2: "Koks yra šios studijų programos kodas?",
-      answer2: "6531JX008",
-      uri: "https://www.viko.lt/studijos/studiju-programos/verslo-ekonomika",
-    },
-    1: {
-      question1:
-        "Iš kiek žodžių  yra sudaryta Buhalterinės Apskaitos studijų programos profesinių veiklos galimybių pastraipa?",
-      answer1: "56",
-      question2: "Koks yra šios studijų programos kodas?",
-      answer2: "6531LX038",
-      uri: "https://www.viko.lt/studijos/studiju-programos/buhalterine-apskaita",
-    },
-    2: {
-      question1:
-        "Iš kiek žodžių  yra sudaryta Investicijų ir Draudimo studijų programos profesinių veiklos galimybių pastraipa?",
-      answer1: "29",
-      question2: "Koks yra šios studijų programos kodas?",
-      answer2: "6531LX040",
-      uri: "https://www.viko.lt/studijos/studiju-programos/investicijos-ir-draudimas",
-    },
-    3: {
-      question1:
-        "Iš kiek žodžių  yra sudaryta Bankininkystės studijų programos profesinių veiklos galimybių pastraipa?",
-      answer1: "18",
-      question2: "Koks yra šios studijų programos kodas?",
-      answer2: "6531LX037",
-      uri: "https://www.viko.lt/studijos/studiju-programos/bankininkyste",
-    },
-    4: {
-      question1:
-        "Iš kiek žodžių  yra sudaryta Finansų studijų programos profesinių veiklos galimybių pastraipa?",
-      answer1: "61",
-      question2: "Koks yra šios studijų programos kodas?",
-      answer2: "6531LX039",
-      uri: "https://www.viko.lt/studijos/studiju-programos/finansai",
-    },
-  };
-
 class CityTask extends Component {
   constructor(props) {
     super(props);
@@ -168,6 +125,38 @@ class CityTask extends Component {
     }
   }
   
+  checkAnsOfDraudimas = () => {
+
+    if(this.state.answer1 == "4") { this.changeColors(1,0) } else {this.changeColors(1,1)}
+    
+    if (this.state.answer1 == "4") {
+        this.allDataIsGood();
+    }
+  }
+
+  checkDecimal (num) {
+	return !!(num % 1);
+  }
+
+  checkAnsOfBankas = () => {
+    
+    if(this.checkDecimal(this.state.answer1)){
+        if(this.state.answer1 > 4.6 && this.state.answer1 < 5.3) {
+            this.changeColors(1,0)
+            this.allDataIsGood();
+        } else {this.changeColors(1,1)}
+    } else {this.changeColors(1,1)}
+
+  }
+
+  checkAnsOfInvestavimas = () => {
+
+    if(this.state.answer1 == "5") { this.changeColors(1,0) } else {this.changeColors(1,1)}
+    
+    if (this.state.answer1 == "5") {
+        this.allDataIsGood();
+    }
+  }
 
   render() {
 
@@ -286,14 +275,127 @@ class CityTask extends Component {
         else return;
     };
 
+    const draudimas = () => {
+        if (this.props.DataToShow == 2)
+          return (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+                <View>
+                <Text style={styles.questionText}> Kiek iš viso yra draudimo rūšių? </Text>
+                </View>                    
+                
+                <View>
+                
+                <TextInput
+                    title="Skaičius:"
+                    value={this.state.answer1}
+                    bgcolor={this.state.answer1color}
+                    ktype="numeric"
+                    maxLength={1}
+                    onChangeText={(text) => this.answer1Change(text)}
+                />
+                
+                </View>
+
+                <Button
+                    color="rgba(30,194,228,0.7)"
+                    title="Atsakyti"
+                    W={150}
+                    H={40}
+                    onPress={() => {
+                        this.checkAnsOfDraudimas();
+                    }}
+                />
+
+            </View>
+          );
+        else return;
+    };
+
+    const investavimas = () => {
+        if (this.props.DataToShow == 1)
+          return (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+                <View>
+                <Text style={styles.questionText}> Kiek yra investavimo taisyklių? </Text>
+                </View>                    
+                
+                <View>
+                
+                <TextInput
+                    title="Skaičius:"
+                    value={this.state.answer1}
+                    bgcolor={this.state.answer1color}
+                    ktype="numeric"
+                    maxLength={1}
+                    onChangeText={(text) => this.answer1Change(text)}
+                />
+                
+                </View>
+
+                <Button
+                    color="rgba(30,194,228,0.7)"
+                    title="Atsakyti"
+                    W={150}
+                    H={40}
+                    onPress={() => {
+                        this.checkAnsOfInvestavimas();
+                    }}
+                />
+
+            </View>
+          );
+        else return;
+    };
+
+    const valiutoskursas = () => {
+        if (this.props.DataToShow == 0)
+          return (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+                <View>
+                <Text style={styles.questionText}> Koks yra Malaizijos Ringito kursas? </Text>
+                </View>                    
+                
+                <View>
+                
+                <TextInput
+                    title="Kursas:"
+                    placeholder="4.7777"
+                    value={this.state.answer1}
+                    bgcolor={this.state.answer1color}
+                    ktype="numeric"
+                    maxLength={6}
+                    onChangeText={(text) => this.answer1Change(text)}
+                />
+                
+                </View>
+
+                <Button
+                    color="rgba(30,194,228,0.7)"
+                    title="Atsakyti"
+                    W={150}
+                    H={40}
+                    onPress={() => {
+                        this.checkAnsOfBankas();
+                    }}
+                />
+
+            </View>
+          );
+        else return;
+    };
+
     return (
       <View style={styles.container}>
 
         {debetas()}
         {tvarumas()}
+        {draudimas()}
+        {investavimas()}
+        {valiutoskursas()}
 
-
-        
       </View>
     );
   }

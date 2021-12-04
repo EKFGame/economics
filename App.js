@@ -31,7 +31,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="splash">
+        <Stack.Navigator initialRouteName="cityPlace">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}

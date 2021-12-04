@@ -85,12 +85,13 @@ class CityPlace extends Component {
     }
     
     if (counter == 5) {
-      this.setState({ allSitesAreVisited: true });
+      setTimeout(() => {
+        this.setState({ allSitesAreVisited: true });
+        this.forceUpdate();  
+      }, 5000);
     }
 
     counter = 0;
-
-    this.forceUpdate();
     
   };
 
@@ -113,7 +114,7 @@ class CityPlace extends Component {
           }}>
             <Button
               color="rgba(1,48,90,0.8)"
-              title="Pereiti į kitą lygį / Registruotis"
+              title="Pereiti į kitą lygį"
               W={400}
               H={80}
               onPress={() => {

@@ -6,6 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import TaskScreen from "./screens/TaskScreen";
 import Task from "./screens/Task";
+import CityTask from "./screens/CityTask";
+import CityTaskScreen from "./screens/CityTaskScreen";
 import Outside from "./screens/navigation/OutSide";
 import Inside from "./screens/navigation/Inside";
 import WebToCheck from "./screens/WebToCheck";
@@ -38,6 +40,16 @@ class App extends Component {
           <Stack.Screen
             name="task"
             component={Task}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="citytaskScreen"
+            component={CityTaskScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="citytask"
+            component={CityTask}
             options={{ headerShown: false }}
           />
           <Stack.Screen

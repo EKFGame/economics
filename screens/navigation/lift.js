@@ -87,8 +87,6 @@ class Lift extends Component {
       this.pan[i].x.setValue(goods[i].posx);
       this.pan[i].y.setValue(goods[i].posy);
     }
-
-    console.log('lift is on');
   };
 
   getPanResponder(index) {

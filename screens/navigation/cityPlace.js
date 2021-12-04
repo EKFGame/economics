@@ -16,8 +16,8 @@ class CityPlace extends Component {
       lietuvosBankas: 'https://www.lb.lt/lt/kasdien-skelbiami-euro-ir-uzsienio-valiutu-santykiai-skelbia-europos-centrinis-bankas',
       lietuvosBankasInvestavimas: 'https://www.lb.lt/lt/investavimas-nuo-ko-pradeti',
       eDrauda: 'https://www.edrauda.lt/',
-      tvarusZodynas: 'https://www.lietuviuzodynas.lt/zodynas/Tvarus',
-      tvarusVerslas: 'https://www.vz.lt/tvarus-verslas',
+      tvarusVerslas: 'https://www.lietuviuzodynas.lt/zodynas/Tvarus',
+      debetas: 'http://zodynas.vz.lt/Debetas',
       
       allSitesAreVisited: false,
 
@@ -45,31 +45,31 @@ class CityPlace extends Component {
   };
 
   navigateToWebLietuvosBankas = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.lietuvosBankas});
+    this.props.navigation.navigate('citytaskScreen', {numberToPass: 0, dataToPassLink: this.state.lietuvosBankas});
     this.state.sitesAreVisited[0].visited = true;
     this.checkOrAllSitesIsVisited();
   };
 
   navigateToWebLietuvosBankasInvestavimas = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.lietuvosBankasInvestavimas});
+    this.props.navigation.navigate('citytaskScreen', {numberToPass: 1, dataToPassLink: this.state.lietuvosBankasInvestavimas});
     this.state.sitesAreVisited[1].visited = true;
     this.checkOrAllSitesIsVisited();
   };
 
   navigateToWebEDrauda = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.eDrauda});
+    this.props.navigation.navigate('citytaskScreen', {numberToPass: 2, dataToPassLink: this.state.eDrauda});
     this.state.sitesAreVisited[2].visited = true;
     this.checkOrAllSitesIsVisited();
   };
 
   navigateToWebTvarusZodynas = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.tvarusZodynas});
+    this.props.navigation.navigate('citytaskScreen', {numberToPass: 3, dataToPassLink: this.state.debetas});
     this.state.sitesAreVisited[3].visited = true;
     this.checkOrAllSitesIsVisited();
   };
 
   navigateToWebTvarusVerslas = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.tvarusVerslas});
+    this.props.navigation.navigate('citytaskScreen', {numberToPass: 4, dataToPassLink: this.state.tvarusVerslas});
     this.state.sitesAreVisited[4].visited = true;
     this.checkOrAllSitesIsVisited();
   };
@@ -152,7 +152,7 @@ class CityPlace extends Component {
               textAlign: "center",
             }}
           >
-            LB Investavimas
+            Investicinė Bendrovė
           </Text>
         </TouchableOpacity>
         
@@ -179,7 +179,7 @@ class CityPlace extends Component {
               textAlign: "center",
             }}
           >
-            Lietuvos Bankas
+            Bankas
           </Text>
         </TouchableOpacity>
 
@@ -206,7 +206,7 @@ class CityPlace extends Component {
               textAlign: "center",
             }}
           >
-            E Drauda
+            Draudimo Įmonė
           </Text>
         </TouchableOpacity>
 
@@ -219,8 +219,8 @@ class CityPlace extends Component {
             padding: 10,
             position: "absolute",
             top: this.resizeHeight(320),
-            left: this.resizeWidth(1411),
-            width: this.resizeWidth(76),
+            left: this.resizeWidth(1390),
+            width: this.resizeWidth(100),
             height: this.resizeHeight(200),
             justifyContent: "center",
             alignItems: "center",
@@ -233,7 +233,7 @@ class CityPlace extends Component {
               textAlign: "center",
             }}
           >
-            Tvarus
+            Apskaitos Įmonė
           </Text>
         </TouchableOpacity>
 

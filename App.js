@@ -21,6 +21,7 @@ import FinancesTwo from "./screens/FinancesTwo";
 import Accounting from "./screens/Accounting";
 import Bussiness from "./screens/Bussiness";
 import SplashWin from "./screens/SplashScreen";
+import MoneyRoom from "./screens/MoneyRoom";
 
 const Stack = createStackNavigator();
 
@@ -31,7 +32,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="cityPlace">
+        <Stack.Navigator initialRouteName="moneyroom">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}
@@ -116,6 +117,11 @@ class App extends Component {
           <Stack.Screen
             name="splash"
             component={SplashWin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="moneyroom"
+            component={MoneyRoom}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

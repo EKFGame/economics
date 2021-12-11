@@ -189,9 +189,9 @@ class Accounting extends Component {
    
   }
 
-  goToSpace = () => {
-      console.log('isejimas');
-  }
+    goToSpace = () => {
+      this.props.navigation.navigate('actionSpaceTwo');
+    }
 
     CheckState = () => {
         

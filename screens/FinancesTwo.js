@@ -132,7 +132,7 @@ export default function FinancesTwo({ navigation: { navigate }}) {
   }
     
   const goToSpace = () => {
-      console.log('praejo');
+    navigate('actionSpaceTwo');
   }
 
   const showPyramid = () => {

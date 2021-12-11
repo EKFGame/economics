@@ -110,7 +110,7 @@ class MoneyRoom extends Component {
   }
 
   endThisTask = () => {
-      console.log('out');
+    this.props.navigation.navigate('actionSpaceTwo');
   }
 
   render() {

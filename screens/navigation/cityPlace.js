@@ -97,7 +97,7 @@ class CityPlace extends Component {
 
 
   goToRegistrationBlank = () => {
-    this.props.navigation.navigate('registration');
+    this.props.navigation.navigate('actionSpaceTwo');
   };
 
   render() {

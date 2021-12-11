@@ -42,8 +42,7 @@ export default function Bussiness({ navigation: { navigate }}) {
   ]);
   
   const updateStorage = () => {
-    console.log('done');
-    //navigate('actionSpace');
+    navigate('actionSpaceTwo');
   }
 
   const filterQuestion = (id, answer) => {
@@ -69,7 +68,7 @@ export default function Bussiness({ navigation: { navigate }}) {
      }
 
     
-     if(temp==7){ //4
+     if(temp==7){ //6
       setques(prev=>prev + 2)
       Alert.alert(
         "Atsakymai teisingi!",

@@ -46,7 +46,7 @@ class Registration extends Component {
   emailChange(email) {
     if (email.length <= 0 || !emailRegex.test(this.state.email)) {
       this.setState({email});
-      this.emailErrorChange('Negalimas Emailas');
+      this.emailErrorChange('El. paštas negalimas');
     } else {
       this.setState({email});
       this.emailErrorChange(false);
@@ -86,11 +86,8 @@ class Registration extends Component {
 
   goToLeaders = () => {
     this.clearData();
-    //this.props.navigation.navigate('leadersData');
+    this.props.navigation.navigate('leadersboard');
   }
-
-
-  /////////////////////
 
   registrerNewGamer = () => {
     if (
@@ -100,16 +97,22 @@ class Registration extends Component {
       this.state.firstName.length < 1 ||
       this.state.lastName.length < 1
     ) {
-      //Alert.alert('Registracija sėkminga!');
-      this.addToDb(this.state.firstName, this.state.lastName, this.state.email);
+      Alert.alert(
+        "Laukai užpildyti netinkamai.",
+        "Klaidos: " + this.state.firstNameError + ' ' + this.state.lastNameError + ' ' + this.state.emailError + 'Užpildykite laukus tinkamai.', [{ text: "Bandyti dar kartą"}],
+        { cancelable: false }
+      );
     } else {
-
-      Alert.alert('Regsitracija sėkminga.');
       this.addToDb();
       this.clearData();
+      Alert.alert(
+        "Registracija sėkminga!",
+        "", [{ text: "Gerai", onPress:() => this.goToLeaders()}],
+        { cancelable: false }
+      );
     }
   };
-  /////////////////////
+  
   addToDb = () => {
 
     const date = new Date().getDate(); //Current Date
@@ -125,14 +128,11 @@ class Registration extends Component {
         userfirstname: this.state.firstName,
         userlastname: this.state.lastName,
         useremail: this.state.email,
-        timeduration: '002244',
+        timeduration: '001814',
         today: ToDay,
       })
       .catch((err) => {
         console.error("Error found: ", err);
-        this.setState({
-          isLoading: false,
-        });
       });
 
   }
@@ -205,7 +205,7 @@ class Registration extends Component {
                 W={160}
                 H={60}
                 onPress={() => {
-                  this.addToDb();
+                  this.goToLeaders();
                 }}
               />  
               <Button

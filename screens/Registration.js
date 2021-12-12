@@ -2,17 +2,25 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ImageBackground, TextInput, Alert } from "react-native";
 import Button from "../components/Button";
+import { firebaseConfig } from "../config";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore'; //v9
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from "uuid";
 
-// const emailRegex = RegExp(
-//   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-// );
+if (firebase.apps.length === 0) {
+  console.log("Connected with Firebase");
+  firebase.initializeApp(firebaseConfig);
+}
 
 let emailRegex = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 const imageBack = require("../images/registrationcover.jpg");
 
+
 class Registration extends Component {
   constructor(props) {
     super(props);
+    this.dbRef = firebase.firestore().collection('leaders'),
     this.state = {
       firstName: "",
       lastName: "",
@@ -92,16 +100,42 @@ class Registration extends Component {
       this.state.firstName.length < 1 ||
       this.state.lastName.length < 1
     ) {
-      Alert.alert('Laukai užpildyti netinkamai');
+      //Alert.alert('Registracija sėkminga!');
+      this.addToDb(this.state.firstName, this.state.lastName, this.state.email);
     } else {
 
       Alert.alert('Regsitracija sėkminga.');
-      //this.props.navigation.navigate('leadersData');
+      this.addToDb();
       this.clearData();
     }
   };
   /////////////////////
+  addToDb = () => {
 
+    const date = new Date().getDate(); //Current Date
+    const month = new Date().getMonth() + 1; //Current Month
+    const year = new Date().getFullYear(); //Current Year
+    const ToDay = date + '-' + month + '-' + year;
+    const uuid = uuidv4();
+    
+    this.dbRef
+      .doc(uuid)
+      .set({
+        id: uuid,
+        userfirstname: this.state.firstName,
+        userlastname: this.state.lastName,
+        useremail: this.state.email,
+        timeduration: '002244',
+        today: ToDay,
+      })
+      .catch((err) => {
+        console.error("Error found: ", err);
+        this.setState({
+          isLoading: false,
+        });
+      });
+
+  }
 
 
   render() {
@@ -171,7 +205,7 @@ class Registration extends Component {
                 W={160}
                 H={60}
                 onPress={() => {
-                  this.goToLeaders();
+                  this.addToDb();
                 }}
               />  
               <Button

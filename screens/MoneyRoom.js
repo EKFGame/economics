@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Alert, Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screen = Dimensions.get("window");
 
@@ -113,6 +114,18 @@ class MoneyRoom extends Component {
     this.props.navigation.navigate('actionSpaceTwo');
   }
 
+  getCurrency = async () => {
+    try {
+      const value = await AsyncStorage.getItem("currency");
+      if (value != null) {
+        this.answer2Change(value);
+        //this.setState({ answer2:  });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     
     const videoArea = () => {
@@ -220,7 +233,7 @@ class MoneyRoom extends Component {
                         W={150}
                         H={40}
                         onPress={() => {
-                            this.checkAnsOfCurrency();
+                            this.getCurrency();
                         }}
                     />
 

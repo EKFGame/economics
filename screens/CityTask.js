@@ -3,6 +3,7 @@ import React, { Component, useState } from "react";
 import { Picker, Alert, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class CityTask extends Component {
   constructor(props) {
@@ -80,6 +81,14 @@ class CityTask extends Component {
       );
   }
 
+  allDataIsGoodForCurrency = () => {
+    Alert.alert(
+        "Valiutos kursas tinkamas, jį galėsi panaudoti kitoje užduotyje!",
+        "", [{ text: "Gerai", onPress:() => this.goToCityPlace()}],
+        { cancelable: false }
+      );
+  }
+
   checkAnsOfTvarumas = () => {
     
     let ans1True = false;
@@ -143,7 +152,8 @@ class CityTask extends Component {
     if(this.checkDecimal(this.state.answer1)){
         if(this.state.answer1 > 4.6 && this.state.answer1 < 5.3) {
             this.changeColors(1,0)
-            this.allDataIsGood();
+            this.allDataIsGoodForCurrency();
+            AsyncStorage.setItem('currency', this.state.answer1);
         } else {this.changeColors(1,1)}
     } else {this.changeColors(1,1)}
 

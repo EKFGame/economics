@@ -30,7 +30,7 @@ class ActionSpaceTwo extends Component {
       imageBack: require("../../images/space.jpg"),
       gameStart: false,
       gameEnd: false,
-      goToCityShow: false,
+      goToRegistration: false,
       fadeInImage: new Animated.Value(0),
 
       basePlaces : {
@@ -119,7 +119,7 @@ class ActionSpaceTwo extends Component {
   endGame = () => {
     this.setState({gameEnd: true});
     this.forceUpdate();
-    this.setState({goToCityShow: true});
+    this.setState({goToRegistration: true});
   }
 
   changeLocation = (index) => {
@@ -279,8 +279,8 @@ class ActionSpaceTwo extends Component {
 
 
     
-    const goToCityShow = () => {
-      if (this.state.goToCityShow == true) {
+    const goToRegistration = () => {
+      if (this.state.goToRegistration == true) {
         this.fadeIn();
         return (
           <View style={{flex: 1}}>
@@ -363,7 +363,7 @@ class ActionSpaceTwo extends Component {
   
 
       {buttonShow()}
-      {goToCityShow()}    
+      {goToRegistration()}    
       
       </ImageBackground>
     );

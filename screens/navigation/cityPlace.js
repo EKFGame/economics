@@ -96,7 +96,7 @@ class CityPlace extends Component {
   };
 
 
-  goToRegistrationBlank = () => {
+  goToNextLevel = () => {
     this.props.navigation.navigate('actionSpaceTwo');
   };
 
@@ -118,7 +118,7 @@ class CityPlace extends Component {
               W={400}
               H={80}
               onPress={() => {
-                this.goToRegistrationBlank();
+                this.goToNextLevel();
               }}
             />
           </View>

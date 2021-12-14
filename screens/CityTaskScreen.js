@@ -8,11 +8,9 @@ class CityTaskScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Data: "Is kazkur ateina sis klaulsimas?",
+      Data: "",
     };
   }
-
-  Data = "jdlajslkjalskd";
 
   render() {
     

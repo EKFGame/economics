@@ -17,15 +17,30 @@ class LeadersBoard extends Component {
       email: "",
       leadersList: [], 
     };
+
+    
+    this.getData();
   }
 
   goToStart = () => {
-    // this.props.navigation.navigate('wellcome');
-    this.getLeaders();
+    this.props.navigation.navigate('wellcome');
   }
 
-  checksmht = () => {
-    this.forceUpdate();
+  updateData = () => {
+    
+    this.setState({leadersList: []});
+    
+    this.getLeaders();
+    setTimeout(() => {
+      this.forceUpdate();  
+    }, 500);
+  }
+
+  getData = () => {
+    this.getLeaders();
+    setTimeout(() => {
+      this.forceUpdate();  
+    }, 1000);
   }
 
   getLeaders = async () => {
@@ -56,13 +71,11 @@ class LeadersBoard extends Component {
     
     const renderUser = (itemData) => {
         
+      const splitedTime = itemData.item.timeduration[0] + itemData.item.timeduration[1] + ':' + itemData.item.timeduration[2] + itemData.item.timeduration[3] + ':' + itemData.item.timeduration[4] + itemData.item.timeduration[5];
         return (
-        <View style={{backgroundColor: 'dodgerblue'}}>
+        <View style={{backgroundColor: 'rgba(1,48,90,0.7)', borderRadius: 10, margin: 5}}>
             <View>
-            <Text>{itemData.item.timeduration}</Text>
-            <Text>{itemData.item.userfirstname}</Text>
-            <Text>{itemData.item.userlastname}</Text>
-            <Text>{itemData.item.toDay}</Text>
+              <Text style={styles.data} >{splitedTime} {itemData.item.userfirstname} {itemData.item.userlastname} {itemData.item.today}</Text>
             </View>
         </View>
         );
@@ -79,7 +92,7 @@ class LeadersBoard extends Component {
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <Text style={styles.title} >Žaidimo Lyderiai</Text>
                 </View>
-                <View style={{flex: 5, backgroundColor: 'green',}}>
+                <View style={{flex: 5,}}>
                     <FlatList
                         data={this.state.leadersList}
                         keyExtractor={(item) => item.id}
@@ -100,11 +113,11 @@ class LeadersBoard extends Component {
                 />
                                 <Button
                     color="rgba(1,48,90,0.8)"
-                    title="Tikrinti"
+                    title="Atnaujinti"
                     W={160}
                     H={60}
                     onPress={() => {
-                    this.checksmht();
+                    this.updateData();
                     }}
                 />
             </View>
@@ -140,6 +153,14 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
     fontWeight: 'bold',
+  },
+  data: {
+    paddingTop: 10,
+    paddingBottom: 5,
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+    left: 10,
   },
 });
 

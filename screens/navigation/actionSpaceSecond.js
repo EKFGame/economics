@@ -16,7 +16,7 @@ const umbrela = require("../../images/umbrela.png"); //3
 const tablet = require("../../images/tablet.png"); //5
 const card = require("../../images/card.png"); //4
 const abacus = require("../../images/abacus.png"); //2
-const city = require("../../images/vilniuscity.jpg");
+const city = require("../../images/endofgame.jpg");
 
 class ActionSpaceTwo extends Component {
   constructor(props) {

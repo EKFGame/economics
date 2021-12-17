@@ -25,7 +25,8 @@ class MoneyRoom extends Component {
 
         trilionGoIn: false, 
         currencyGoIn: false, 
-        webData: 'https://www.youtube.com/watch?v=IJMvFR1ijag&t=90s',
+        webData: 'https://www.youtube.com/watch?v=hgIfB-bxAUg',
+        videoSecondWeb: 'https://youtu.be/rSO0DNNpKb8',
         answer1color: 'white',
         answer1: '',
         answer2color: 'white',
@@ -58,7 +59,7 @@ class MoneyRoom extends Component {
     }
 
   goToWebSecond = () => {
-    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.webData});
+    this.props.navigation.navigate('webtocheck', {dataToPass: this.state.videoSecondWeb});
     this.updateData(2);
   }
 

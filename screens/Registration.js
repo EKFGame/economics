@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ImageBackground, TextInput, Alert } from "react-native";
 import Button from "../components/Button";
-import { firebaseConfig } from "../config";
+import { firebaseConfig } from "../DBconfig";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'; //v9
 import 'react-native-get-random-values';

@@ -335,9 +335,6 @@ class ActionSpace extends Component {
             style={[styles.imageCity, { opacity: this.state.fadeInImage }]}
             source={city}
             resizeMode="stretch"
-          
-          
-          
           />
 
           <View style={styles.cityButtonplace}>

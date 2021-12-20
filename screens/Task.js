@@ -13,6 +13,34 @@ class Task extends Component {
       answer1color: "white",
       answer2color: "white",
     };
+
+    
+    setTimeout(() => {
+      this.setGoodAns();
+    }, 1000);
+    
+  }
+
+  setGoodAns = () => {
+    if (this.props.DataToShow.answer1 == '56'){
+      this.setState({ answer1 : this.props.DataToShow.answer1});
+      this.setState({ answer2 : this.props.DataToShow.answer2});  
+    }
+
+    if (this.props.DataToShow.answer1 == '29'){
+      this.setState({ answer1 : this.props.DataToShow.answer1});
+      this.setState({ answer2 : this.props.DataToShow.answer2});  
+    }
+
+    if (this.props.DataToShow.answer1 == '18'){
+      this.setState({ answer1 : this.props.DataToShow.answer1});
+      this.setState({ answer2 : this.props.DataToShow.answer2});  
+    }
+
+    if (this.props.DataToShow.answer1 == '61'){
+      this.setState({ answer1 : this.props.DataToShow.answer1});
+      this.setState({ answer2 : this.props.DataToShow.answer2});  
+    }
   }
 
   answer1Change(answer1) {

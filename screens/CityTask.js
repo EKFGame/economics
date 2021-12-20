@@ -73,9 +73,19 @@ class CityTask extends Component {
     this.props.navigation.navigate("cityPlace");
   }
 
-  allDataIsGood = () => {
+  allDataIsGoodForMany = () => {
+    
     Alert.alert(
         "Atsakymai teisingi!",
+        "", [{ text: "Gerai", onPress:() => this.goToCityPlace()}],
+        { cancelable: false }
+      );
+  }
+
+  allDataIsGoodForOne = () => {
+    
+    Alert.alert(
+        "Atsakymas teisingas!",
         "", [{ text: "Gerai", onPress:() => this.goToCityPlace()}],
         { cancelable: false }
       );
@@ -118,7 +128,7 @@ class CityTask extends Component {
         this.state.answer2.toLowerCase() != this.state.answer1.toLowerCase() && this.state.answer2.toLowerCase() != this.state.answer3.toLowerCase()
     ) {
         if ( ans1True == true && ans2True == true && ans3True == true) {
-            this.allDataIsGood();
+            this.allDataIsGoodForMany();
         }
     }
 
@@ -130,7 +140,7 @@ class CityTask extends Component {
     if(this.state.answer2 == "3") { this.changeColors(2,0) } else {this.changeColors(2,1)}
     
     if (this.state.answer1 == "2" && this.state.answer2 == "3") {
-        this.allDataIsGood();
+        this.allDataIsGoodForMany();
     }
   }
   
@@ -139,7 +149,7 @@ class CityTask extends Component {
     if(this.state.answer1 == "4") { this.changeColors(1,0) } else {this.changeColors(1,1)}
     
     if (this.state.answer1 == "4") {
-        this.allDataIsGood();
+        this.allDataIsGoodForOne();
     }
   }
 
@@ -164,7 +174,7 @@ class CityTask extends Component {
     if(this.state.answer1 == "5") { this.changeColors(1,0) } else {this.changeColors(1,1)}
     
     if (this.state.answer1 == "5") {
-        this.allDataIsGood();
+        this.allDataIsGoodForOne();
     }
   }
 
@@ -179,7 +189,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Sužinokite kokios yra Debetas ir pasirinkite teisingus atsakymus </Text>
+                <Text style={styles.questionText}> Sužinokite kas yra Debetas ir pasirinkite teisingus atsakymus </Text>
                 </View>                    
                 
                 <View>

@@ -128,7 +128,7 @@ class Registration extends Component {
         userfirstname: this.state.firstName,
         userlastname: this.state.lastName,
         useremail: this.state.email,
-        timeduration: '001814',
+        timeduration: '001427',
         today: ToDay,
       })
       .catch((err) => {

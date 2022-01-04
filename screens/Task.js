@@ -17,7 +17,7 @@ class Task extends Component {
     
     setTimeout(() => {
       this.setGoodAns();
-    }, 1000);
+    }, 7000);
     
   }
 

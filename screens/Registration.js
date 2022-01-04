@@ -2,11 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ImageBackground, TextInput, Alert } from "react-native";
 import Button from "../components/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from "uuid";
 import { firebaseConfig } from "../DBconfig";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'; //v9
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from "uuid";
 
 if (firebase.apps.length === 0) {
   console.log("Connected with Firebase");
@@ -27,8 +28,13 @@ class Registration extends Component {
       email: "",
       emailError: "",
       firstNameError: "",
-      lastNameError: "",  
+      lastNameError: "",
+      dateStart: '',
+      dateEnd: '',
+      timeSpend: '',  
     };
+
+    this.getDatesOfSpendInGame();
   }
 
   firstNameErrorChange = (text) => {
@@ -42,6 +48,18 @@ class Registration extends Component {
   emailErrorChange = (text) => {
     this.setState({emailError: text});
   };
+
+  dateStartChange(date) {
+    this.setState({ dateStart: date });
+  }
+
+  dateEndChange(date) {
+    this.setState({ dateEnd: date });
+  }
+
+  timeSpendChange(date) {
+    this.setState({ timeSpend: date });
+  }
 
   emailChange(email) {
     if (email.length <= 0 || !emailRegex.test(this.state.email)) {
@@ -73,15 +91,52 @@ class Registration extends Component {
     }
   }
 
+  getDatesOfSpendInGame = async () => {
+    try {
+      const dateStart = await AsyncStorage.getItem("datestart");
+      const dateEnd = await AsyncStorage.getItem("dateend");
+      if (dateStart != null && dateEnd != null) {
+        this.dateStartChange(dateStart);
+        this.dateEndChange(dateEnd);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   clearData = () => {
     this.setState({firstName: ""});
     this.setState({lastName: ""});
     this.setState({email: ""});
   };
 
+  getTimeSpendInGame = () => {
+    
+    var hin = '00';
+    var min = '00';
+    var sin = '00';
+
+    var onlySeconds = Number(this.substractDates());
+    var h = Math.floor(onlySeconds / 3600);
+    var m = Math.floor(onlySeconds % 3600 / 60);
+    var s = Math.floor(onlySeconds % 3600 % 60);
+    
+    if (h < 10 ) {hin = '0' + h} else {hin = h};
+    if (m < 10 ) {min = '0' + m} else {min = m}
+    if (s < 10 ) {sin = '0' + s} else {sin = s}
+    return hin + '' + min + '' + sin; 
+  }
+
+  substractDates = () => {
+    var secondBetweenTwoDate = Math.abs((this.state.dateEnd - this.state.dateStart) / 1000);
+    var FullSeconds = secondBetweenTwoDate.toString().split('.');
+    var onlySeconds = FullSeconds[0];
+    return onlySeconds;
+  }
+
   goToStart = () => {
     this.clearData();
-    this.props.navigation.navigate('wellcome');
+    this.props.navigation.navigate('wellcome');      
   }
 
   goToLeaders = () => {
@@ -104,7 +159,6 @@ class Registration extends Component {
       );
     } else {
       this.addToDb();
-      this.clearData();
       Alert.alert(
         "Registracija sėkminga!",
         "", [{ text: "Gerai", onPress:() => this.goToLeaders()}],
@@ -114,13 +168,14 @@ class Registration extends Component {
   };
   
   addToDb = () => {
-
+    
+    const timeDurationOfGame = this.getTimeSpendInGame();
     const date = new Date().getDate(); //Current Date
     const month = new Date().getMonth() + 1; //Current Month
     const year = new Date().getFullYear(); //Current Year
     const ToDay = date + '-' + month + '-' + year;
     const uuid = uuidv4();
-    
+
     this.dbRef
       .doc(uuid)
       .set({
@@ -128,7 +183,7 @@ class Registration extends Component {
         userfirstname: this.state.firstName,
         userlastname: this.state.lastName,
         useremail: this.state.email,
-        timeduration: '001427',
+        timeduration: timeDurationOfGame,
         today: ToDay,
       })
       .catch((err) => {

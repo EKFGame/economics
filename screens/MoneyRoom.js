@@ -22,7 +22,7 @@ class MoneyRoom extends Component {
         video2: false,
         currencyTask: false,
         trilionTask: false,
-
+        endTask: false,
         trilionGoIn: false, 
         currencyGoIn: false, 
         webData: 'https://www.youtube.com/watch?v=hgIfB-bxAUg',
@@ -76,6 +76,10 @@ class MoneyRoom extends Component {
   }
 
   backFromTask = () => {
+    if (this.state.currencyTask == true && this.state.trilionTask == true) {
+      this.setState({endTask: true});
+    }
+    
     this.setState({currencyGoIn: false});
     this.setState({trilionGoIn: false});
     this.setState({bothAreas: true});
@@ -89,6 +93,7 @@ class MoneyRoom extends Component {
         { cancelable: false }
       );
   }
+  
 
   checkAnsOfTrilijonas = () => {
 
@@ -257,7 +262,7 @@ class MoneyRoom extends Component {
 
     const EndButton = () => {
       
-        if (this.state.video1 == true && this.state.video2 == true && this.state.currencyTask == true && this.state.trilionTask == true){
+        if (this.state.endTask == true){
           return (
             <View style={{padding: 50}}>
                 <Button

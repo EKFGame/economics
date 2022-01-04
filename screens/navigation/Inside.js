@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, Dimensions, TouchableOpacity, Image } from "react-native";
 import NavBase from "./NavigationBase";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IMAGE = require("../../images/insideph.jpg");
 const IMAGE_WIDTH = 3532;
@@ -30,6 +31,7 @@ class Inside extends Component {
   };
 
   navigateToLift = () => {
+    AsyncStorage.setItem('datestart', new Date().getTime().toString());
     this.props.navigation.navigate('lift');
   };
 

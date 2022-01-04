@@ -189,6 +189,8 @@ class TaskID extends Component {
         if (this.state.AnswerOne == 7 && this.state.AnswerTwo == 6) {
           this.setState({AnswerOne: ''});
           this.setState({AnswerTwo: ''});
+          this.state.Answers[6].show = false;
+          this.state.Answers[7].show = false;
           this.allGoodData();
         }
       }

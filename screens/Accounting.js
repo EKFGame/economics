@@ -203,10 +203,10 @@ class Accounting extends Component {
         }
         }
 
-        if (counter == 9) {
+        if (counter == 4) { //9
         
             Alert.alert(
-                "Atsakymai teisingi!",
+                "DEMO - 4/9 Atsakymai teisingi!",
                 "", [{ text: "Gerai", onPress:() => this.goToSpace()}],
                 { cancelable: false }
             );

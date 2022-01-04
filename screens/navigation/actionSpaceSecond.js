@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
 import Button from "../../components/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screen = Dimensions.get("window");
 const sizeofx = screen.width / 2;
@@ -263,7 +264,8 @@ class ActionSpaceTwo extends Component {
       
   }
 
-  goToCityPlace = () => {
+  updateStorageAngGoOut = () => {
+    AsyncStorage.setItem('dateend', new Date().getTime().toString());
     this.props.navigation.navigate('registration');
   }
 
@@ -297,7 +299,7 @@ class ActionSpaceTwo extends Component {
               W={300}
               H={80}
               onPress={() => {
-                this.goToCityPlace();
+                this.updateStorageAngGoOut();
               }}
             />
           </View>

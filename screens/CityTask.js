@@ -44,15 +44,15 @@ class CityTask extends Component {
   changeColors = (word, color) => {
 
     if (word == 1 && color == 1) {
-        this.setState({answer1color: 'red'});
+        this.setState({answer1color: 'rgba(255,51,51,0.8)'});
     }
 
     if (word == 2 && color == 1) {
-        this.setState({answer2color: 'red'});
+        this.setState({answer2color: 'rgba(255,51,51,0.8)'});
     }
 
     if (word == 2 && color == 1) {
-        this.setState({answer3color: 'red'});
+        this.setState({answer3color: 'rgba(255,51,51,0.8)'});
     }  
 
     if (word == 1 && color == 0) {

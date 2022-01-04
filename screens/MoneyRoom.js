@@ -97,7 +97,7 @@ class MoneyRoom extends Component {
 
   checkAnsOfTrilijonas = () => {
 
-    if(this.state.answer1 == "1000000000000") { this.setState({answer1color: 'white'}) } else {this.setState({answer1color: 'red'})}
+    if(this.state.answer1 == "1000000000000") { this.setState({answer1color: 'white'}) } else {this.setState({answer1color: 'rgba(255,51,51,0.8)'})}
     
     if (this.state.answer1 == "1000000000000") {
         this.allDataIsGood();
@@ -112,7 +112,7 @@ class MoneyRoom extends Component {
         this.allDataIsGood();
         this.setState({currencyTask: true});
 
-    } else {this.setState({answer2color: 'red'})}
+    } else {this.setState({answer2color: 'rgba(255,51,51,0.8)'})}
     
   }
 

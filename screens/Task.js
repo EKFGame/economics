@@ -58,11 +58,11 @@ class Task extends Component {
   checkAns = () => {
 
     if (this.props.DataToShow.answer1 != this.state.answer1) {
-      this.setState({answer1color: 'red'});
+      this.setState({answer1color: 'rgba(255,51,51,0.8)'});
     }
     
     if (this.props.DataToShow.answer2 != this.state.answer2) {
-      this.setState({answer2color: 'red'});
+      this.setState({answer2color: 'rgba(255,51,51,0.8)'});
     }
 
     if (this.props.DataToShow.answer1 == this.state.answer1) {

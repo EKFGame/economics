@@ -214,8 +214,11 @@ class ActionSpaceTwo extends Component {
         moveIn = true;
         pointOfMove = 12;
         this.movePanObject(19, sizeofx+10);
-        this.endGame();
         this.props.navigation.navigate('financestwo');
+
+        setTimeout(() => {
+          this.endGame();
+        }, 3000);
       }
 
     }

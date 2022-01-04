@@ -142,8 +142,8 @@ class ActionSpace extends Component {
 
   endGame = () => {
     this.setState({gameEnd: true});
-    this.forceUpdate();
     this.setState({goToCityShow: true});
+    this.forceUpdate();
   }
 
   changeLocation = (index) => {
@@ -237,8 +237,12 @@ class ActionSpace extends Component {
         moveIn = true;
         pointOfMove = 12;
         this.movePanObject(19, sizeofx+10);
-        this.endGame();
         this.props.navigation.navigate('taskScreen', {numberToPass: 4});
+
+        setTimeout(() => {
+          this.endGame();
+        }, 3000);
+        
       }
 
     }

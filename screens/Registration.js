@@ -67,27 +67,27 @@ class Registration extends Component {
       this.emailErrorChange('El. paštas negalimas');
     } else {
       this.setState({email});
-      this.emailErrorChange(false);
+      this.emailErrorChange('');
     }
   }
 
   firstNameChange(firstName) {
     if (firstName.length < 3) {
       this.setState({firstName});
-      this.firstNameErrorChange('Vardas turi būti netrupesnis nei 3 siboliai!');
+      this.firstNameErrorChange('Vardas turi būti netrupesnis nei 3 simboliai!');
     } else {
       this.setState({firstName});
-      this.firstNameErrorChange(false);
+      this.firstNameErrorChange('');
     }
   }
 
   lastNameChange(lastName) {
     if (lastName.length < 2) {
       this.setState({lastName});
-      this.lastNameErrorChange('Pavardė turi būti netrupesnė nei 2 siboliai!');
+      this.lastNameErrorChange('Pavardė turi būti netrupesnė nei 2 simboliai!');
     } else {
       this.setState({lastName});
-      this.lastNameErrorChange(false);
+      this.lastNameErrorChange('');
     }
   }
 
@@ -154,7 +154,7 @@ class Registration extends Component {
     ) {
       Alert.alert(
         "Laukai užpildyti netinkamai.",
-        "Klaidos: " + this.state.firstNameError + ' ' + this.state.lastNameError + ' ' + this.state.emailError + 'Užpildykite laukus tinkamai.', [{ text: "Bandyti dar kartą"}],
+        "Klaidos: " + this.state.firstNameError + ' ' + this.state.lastNameError + ' ' + this.state.emailError + ' ' + 'Užpildykite laukus tinkamai.', [{ text: "Bandyti dar kartą"}],
         { cancelable: false }
       );
     } else {

@@ -26,6 +26,8 @@ import TaskID from "./screens/IDtask";
 import ActionSpaceTwo from "./screens/navigation/actionSpaceSecond";
 import LeadersBoard from "./screens/LeadersBoard";
 
+import ActionDemo from "./screens/navigation/actionDemo";
+
 const Stack = createStackNavigator();
 
 class App extends Component {
@@ -140,6 +142,11 @@ class App extends Component {
           <Stack.Screen
             name="leadersboard"
             component={LeadersBoard}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="actiondemo"
+            component={ActionDemo}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -203,10 +203,10 @@ class Accounting extends Component {
         }
         }
 
-        if (counter == 4) { //9
+        if (counter == 9) { //9
         
             Alert.alert(
-                "DEMO - 4/9 Atsakymai teisingi!",
+                "Atsakymai teisingi!",
                 "", [{ text: "Gerai", onPress:() => this.goToSpace()}],
                 { cancelable: false }
             );
@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: 25,
+    fontSize: screen.width / 19,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',

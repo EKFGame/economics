@@ -39,6 +39,9 @@ class TaskID extends Component {
         AnswerOne: '',
         AnswerTwo: '',
 
+        leftside: false,
+        rightside: false,
+        
         questionArray: {
           0: {q: 'Kas valdo investicinį fondą?'},
           1: {q: 'Kokius mokesčius taiko fondas investuotojams?'},
@@ -197,27 +200,40 @@ class TaskID extends Component {
 
       this.setState({AnswerOne: ''});
       this.setState({AnswerTwo: ''});
+      this.setState({rightside: false});
+      this.setState({leftside: false});
       this.givePlaces();
+    }
+
+    checkMoves = (index) => {
+
+      if (this.state.AnswerOne == index) { this.setState({AnswerOne: ''}); this.setState({rightside: false}); }
+      if (this.state.AnswerTwo == index) { this.setState({AnswerTwo: ''}); this.setState({leftside: false}); }
+    
     }
 
     getPanResponder(index) {
         return PanResponder.create({
         onStartShouldSetPanResponder: () => true,
+        
+          
 
         onPanResponderGrant: () => {
-            this.pan[index].setOffset({
-            x: this.pan[index].x._value,
-            y: this.pan[index].y._value,
-            });
+          
+          this.pan[index].setOffset({
+          x: this.pan[index].x._value,
+          y: this.pan[index].y._value,
+          });
+          
         },
 
         onPanResponderMove: (_, gesture) => {
-            this.pan[index].x.setValue(gesture.dx);
-            this.pan[index].y.setValue(gesture.dy);
+          this.pan[index].x.setValue(gesture.dx);
+          this.pan[index].y.setValue(gesture.dy);
         },
 
         onPanResponderRelease: (e, gesture) => {
-          
+          this.checkMoves(index);
           this.pan[index].flattenOffset();
           let spotY = screen.height/100*45.5;
           let spotXL = screen.width/100*3;
@@ -230,16 +246,18 @@ class TaskID extends Component {
           let PanYfloatFormat = parseFloat(stringFormaty);
 
           if ((screen.width/2 - answerSizeWidth/2) > PanXfloatFormat) {
-            if (screen.height/2 > PanYfloatFormat && (screen.height/10)*4 < PanYfloatFormat && this.state.AnswerOne == '') {
+            if (screen.height/2 > PanYfloatFormat && (screen.height/10)*4 < PanYfloatFormat && this.state.rightside != true) {
               this.pan[index].y.setValue(spotY);
               this.pan[index].x.setValue(spotXL);
               this.setState({AnswerOne: index});
+              this.setState({rightside: true});
             } 
           } else {
-            if (screen.height/2 > PanYfloatFormat && (screen.height/10)*4 < PanYfloatFormat && this.state.AnswerTwo == '') {
+            if (screen.height/2 > PanYfloatFormat && (screen.height/10)*4 < PanYfloatFormat && this.state.leftside != true) {
               this.pan[index].y.setValue(spotY);
               this.pan[index].x.setValue(spotXR);
               this.setState({AnswerTwo: index});
+              this.setState({leftside: true});
             } 
           }
 

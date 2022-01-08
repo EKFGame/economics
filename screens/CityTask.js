@@ -51,7 +51,7 @@ class CityTask extends Component {
         this.setState({answer2color: 'rgba(255,51,51,0.8)'});
     }
 
-    if (word == 2 && color == 1) {
+    if (word == 3 && color == 1) {
         this.setState({answer3color: 'rgba(255,51,51,0.8)'});
     }  
 
@@ -107,29 +107,37 @@ class CityTask extends Component {
 
     for (let i = 0; i < 11; i++) {
         
-        if (this.state.wordsOfTvarumas[i] == this.state.answer1.toLowerCase()) {
-            ans1True = true;
-        }
+      if (this.state.wordsOfTvarumas[i] == this.state.answer1.toLowerCase()) {
+          ans1True = true;
+      }
 
-        if (this.state.wordsOfTvarumas[i] == this.state.answer2.toLowerCase()) {
-            ans2True = true;
-        }
+      if (this.state.wordsOfTvarumas[i] == this.state.answer2.toLowerCase()) {
+          ans2True = true;
+      }
 
-        if (this.state.wordsOfTvarumas[i] == this.state.answer3.toLowerCase()) {
-            ans3True = true;
-        }
+      if (this.state.wordsOfTvarumas[i] == this.state.answer3.toLowerCase()) {
+          ans3True = true;
+      }
     }
 
+    if (this.state.answer1.toLowerCase() == this.state.answer2.toLowerCase()) {
+      ans2True = false;
+    }
+
+    if (this.state.answer1.toLowerCase() == this.state.answer3.toLowerCase()) {
+      ans3True = false;
+    }
+    
+    if (this.state.answer2.toLowerCase() == this.state.answer3.toLowerCase()) {
+      ans3True = false;
+    }
+    
     if(ans1True == true) { this.changeColors(1,0) } else {this.changeColors(1,1)}
     if(ans2True == true) { this.changeColors(2,0) } else {this.changeColors(2,1)}
     if(ans3True == true) { this.changeColors(3,0) } else {this.changeColors(3,1)}
-
-    if( this.state.answer1.toLowerCase() != this.state.answer2.toLowerCase() && this.state.answer1.toLowerCase() != this.state.answer3.toLowerCase() && 
-        this.state.answer2.toLowerCase() != this.state.answer1.toLowerCase() && this.state.answer2.toLowerCase() != this.state.answer3.toLowerCase()
-    ) {
-        if ( ans1True == true && ans2True == true && ans3True == true) {
-            this.allDataIsGoodForMany();
-        }
+    
+    if ( ans1True == true && ans2True == true && ans3True == true) {
+      this.allDataIsGoodForMany();
     }
 
   }
@@ -154,16 +162,24 @@ class CityTask extends Component {
   }
 
   checkDecimal (num) {
-	return !!(num % 1);
+	  
+    
+    return !!(num % 1);
   }
 
   checkAnsOfBankas = () => {
     
-    if(this.checkDecimal(this.state.answer1)){
-        if(this.state.answer1 > 4.6 && this.state.answer1 < 5.3) {
+    let numbdec = 0.0;
+
+    if (this.state.answer1.includes(',')) {
+      numbdec = this.state.answer1.replace(',','.');
+    } else { numbdec = this.state.answer1; }
+    
+    if(this.checkDecimal(numbdec)){
+        if(numbdec > 4.6 && numbdec < 5.3) {
             this.changeColors(1,0)
             this.allDataIsGoodForCurrency();
-            AsyncStorage.setItem('currency', this.state.answer1);
+            AsyncStorage.setItem('currency', numbdec);
         } else {this.changeColors(1,1)}
     } else {this.changeColors(1,1)}
 
@@ -189,7 +205,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Sužinokite kas yra Debetas ir pasirinkite teisingus atsakymus </Text>
+                <Text style={styles.questionText}> Sužinokite kas yra Debetas ir pasirinkite teisingus atsakymus. </Text>
                 </View>                    
                 
                 <View>
@@ -250,7 +266,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Sužinokite kokios yra Tvarumo reikšmės ir užsirašykite tris iš jų </Text>
+                <Text style={styles.questionText}> Sužinokite kokios yra Tvarumo reikšmės ir užsirašykite tris iš jų. </Text>
                 </View>                    
                 
                 <View style={{flexDirection: 'row'}}>

@@ -1,10 +1,11 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { TextInput ,StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native';
+import { TextInput, Dimensions ,StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native';
 import Button from '../components/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
+const screen = Dimensions.get("window");
 const imageBack = require("../images/space.jpg");
 const pyramidImage = require("../images/pyramidthree.jpg");
 
@@ -113,11 +114,12 @@ export default function FinancesTwo({ navigation: { navigate }}) {
 
     if (squareAns[0] == '5' && squareAns[1] == '3' && squareAns[2] == '4' && squareAns[3] == '2' && squareAns[4] == '6' && squareAns[5] == '1') {
         
-        Alert.alert(
-            "Atsakymai teisingi!",
-            "", [{ text: "Gerai", onPress:() => goToSpace()}],
-            { cancelable: false }
-        );
+      //AsyncStorage.setItem('dateend', new Date().getTime().toString());
+      Alert.alert(
+          "Atsakymai teisingi!",
+          "", [{ text: "Gerai", onPress:() => goToSpace()}],
+          { cancelable: false }
+      );
 
     } else {
 
@@ -236,7 +238,7 @@ export default function FinancesTwo({ navigation: { navigate }}) {
             value = {inputText}
             editable = {false}
             backgroundColor = 'white'
-            fontSize = {25}
+            fontSize = {screen.width/17.5}
             borderRadius = {10}
             width = {25}
             textAlign = 'center'
@@ -264,7 +266,7 @@ export default function FinancesTwo({ navigation: { navigate }}) {
                     value={squareAns[inputTextItem]}
                     editable = {true}
                     backgroundColor = 'white'
-                    fontSize = {25}
+                    fontSize = {screen.width/17.5}
                     borderRadius = {10}
                     width = {25}
                     textAlign = 'center'
@@ -416,7 +418,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: 25,
+    fontSize: screen.width / 18,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
@@ -426,7 +428,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: 18,
+    fontSize: screen.width / 26.5,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
@@ -443,7 +445,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   dataItemsText: {
-    fontSize: 15,
+    fontSize: screen.width / 30.5,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',

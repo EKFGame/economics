@@ -184,6 +184,7 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[16].respond = true;
         this.movePanObject(15, sizeofx+10);
         this.props.navigation.navigate('bussiness');
+        //this.props.navigation.navigate('accounting');
       }
 
       if(index == 4 && this.state.basePlaces[16].used == true){
@@ -192,6 +193,7 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[17].respond = true;
         this.movePanObject(16, sizeofx+10);
         this.props.navigation.navigate('accounting');
+        //this.props.navigation.navigate('idtask');
       }
 
       if(index == 8 && this.state.basePlaces[17].used == true == true){
@@ -200,6 +202,7 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[18].respond = true;
         this.movePanObject(17, sizeofx+10);
         this.props.navigation.navigate('idtask');
+        //this.props.navigation.navigate('moneyroom');
       }
 
       if(index == 10 && this.state.basePlaces[18].used == true == true ){
@@ -208,6 +211,7 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[19].respond = true;
         this.movePanObject(18, sizeofx+10);
         this.props.navigation.navigate('moneyroom');
+        //this.props.navigation.navigate('financestwo');
       }
 
       if(index == 12 && this.state.basePlaces[19].used == true == true){

@@ -1,7 +1,7 @@
 import { setStatusBarNetworkActivityIndicatorVisible, StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { Alert, Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import TextInput from "../components/TextInput";
+import { Alert, TextInput, Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import MyTextInput from "../components/TextInput";
 import Button from "../components/Button";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -40,8 +40,18 @@ class MoneyRoom extends Component {
   }
 
   answer2Change(answer2) {
+    let answithdot 
+    
+    if (answer2.includes(',')) {
+      answithdot = answer2.replace(',','.');
+    } else { answithdot = answer2 }
+    
+    let tempNumber = 1000000000000 / answithdot;
+    
     this.setState({ answer2 });
-    this.setState({ currencyNumber: 1000000000000 / answer2 });
+    
+    let numbdec = tempNumber.toString().replace('.',',');    
+    this.setState({ currencyNumber: numbdec });
   }
 
   updateData = (num) => {
@@ -107,7 +117,13 @@ class MoneyRoom extends Component {
 
   checkAnsOfCurrency = () => {
 
-    if(this.state.currencyNumber > 188679245283 && this.state.currencyNumber < 217391304348) {
+    let answithdot = 0.0;
+
+    if (this.state.currencyNumber.includes(',')) {
+      answithdot = this.state.currencyNumber.replace(',','.');
+    } else { answithdot = this.state.currencyNumber }
+
+    if(answithdot > 188679245283 && answithdot < 217391304348) {
         this.setState({answer2color: 'white'});
         this.allDataIsGood();
         this.setState({currencyTask: true});
@@ -124,7 +140,8 @@ class MoneyRoom extends Component {
     try {
       const value = await AsyncStorage.getItem("currency");
       if (value != null) {
-        this.answer2Change(value);
+        let numbdec = value.toString().replace('.',',');
+        this.answer2Change(numbdec);
         //this.setState({ answer2:  });
       }
     } catch (err) {
@@ -176,25 +193,23 @@ class MoneyRoom extends Component {
                 <View>
                     <Text style={styles.questionText}> Kaip yra užrašomas vienas trilijonas? </Text>
                 </View>                    
-                
-                <View>
-                
-                <TextInput
-                    title="Trilijonas:"
-                    value={this.state.answer1}
-                    bgcolor={this.state.answer1color}
-                    ktype="numeric"
-                    width={300}
-                    onChangeText={(text) => this.answer1Change(text)}
-                />
-                
-                </View>
+
+                <View style={styles.inputContainer}>
+                  <Text style={styles.title}>Trilijonas:</Text>
+                  <TextInput style={styles.input}
+                      value={this.state.answer1}
+                      backgroundColor={this.state.answer1color}
+                      keyboardType="numeric"
+                      width={120}
+                      onChangeText={(text) => this.answer1Change(text)}
+                  />
+                </View>  
 
                 <Button
                     color="rgba(133,88,31,0.9)"
                     title="Pasitikrinti"
                     W={150}
-                    H={40}
+                    H={50}
                     onPress={() => {
                         this.checkAnsOfTrilijonas();
                     }}
@@ -216,11 +231,11 @@ class MoneyRoom extends Component {
                     <Text style={styles.questionText}> Kiek Eurų maždaug sudaro trilijonas Malaizijos Ringitų? </Text>
                 </View>                    
                 <View>
-                <Text style={styles.questionText}> €: {this.state.currencyNumber}</Text>
+                <Text style={styles.currencyText}> €: {this.state.currencyNumber}</Text>
                 </View>
                 <View>
                 
-                <TextInput
+                <MyTextInput
                     title="Ringito kursas:"
                     value={this.state.answer2}
                     bgcolor={this.state.answer2color}
@@ -237,7 +252,7 @@ class MoneyRoom extends Component {
                         color="rgba(133,88,31,0.9)"
                         title="Auto įvedimas"
                         W={150}
-                        H={40}
+                        H={50}
                         onPress={() => {
                             this.getCurrency();
                         }}
@@ -247,7 +262,7 @@ class MoneyRoom extends Component {
                         color="rgba(133,88,31,0.9)"
                         title="Pasitikrinti"
                         W={150}
-                        H={40}
+                        H={50}
                         onPress={() => {
                             this.checkAnsOfCurrency();
                         }}
@@ -336,8 +351,14 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: screen.width/19,
     color: "black",
+    textAlign: "center",
+  },
+  currencyText: {
+    fontWeight: "bold",
+    fontSize: 25,
+    color: "green",
     textAlign: "center",
   },
   areaAround: {
@@ -346,6 +367,33 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(196,147,78,0.9)',
     borderRadius: 20,
     width: '95%',
+  },
+  input: {
+    padding: 7,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 10,
+    flex: 1,
+    marginBottom: 5,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  inputContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: 80,
+    marginLeft: 5,
+    marginRight: 5,
+    width: 100,
+  },
+  title: {
+    paddingTop: 10,
+    paddingBottom: 5,
+    fontSize: 14,
+    textAlign: 'left',
+    color: "lightgrey",
+    fontWeight: 'bold',
   },
 });
 

@@ -10,7 +10,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'; //v9
 
 if (firebase.apps.length === 0) {
-  console.log("Connected with Firebase");
+  //console.log("Connected with Firebase");
   firebase.initializeApp(firebaseConfig);
 }
 
@@ -26,9 +26,9 @@ class Registration extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      emailError: "",
-      firstNameError: "",
-      lastNameError: "",
+      emailError: false,
+      firstNameError: false,
+      lastNameError: false,
       dateStart: '',
       dateEnd: '',
       timeSpend: '',  
@@ -67,7 +67,7 @@ class Registration extends Component {
       this.emailErrorChange('El. paštas negalimas');
     } else {
       this.setState({email});
-      this.emailErrorChange('');
+      this.emailErrorChange(false);
     }
   }
 
@@ -77,7 +77,7 @@ class Registration extends Component {
       this.firstNameErrorChange('Vardas turi būti netrupesnis nei 3 simboliai!');
     } else {
       this.setState({firstName});
-      this.firstNameErrorChange('');
+      this.firstNameErrorChange(false);
     }
   }
 
@@ -87,7 +87,7 @@ class Registration extends Component {
       this.lastNameErrorChange('Pavardė turi būti netrupesnė nei 2 simboliai!');
     } else {
       this.setState({lastName});
-      this.lastNameErrorChange('');
+      this.lastNameErrorChange(false);
     }
   }
 
@@ -150,11 +150,12 @@ class Registration extends Component {
       this.state.emailError !== false ||
       this.state.lastNameError !== false ||
       this.state.firstName.length < 1 ||
-      this.state.lastName.length < 1
+      this.state.lastName.length < 1 ||
+      this.state.email.length < 1 
     ) {
       Alert.alert(
         "Laukai užpildyti netinkamai.",
-        "Klaidos: " + this.state.firstNameError + ' ' + this.state.lastNameError + ' ' + this.state.emailError + ' ' + 'Užpildykite laukus tinkamai.', [{ text: "Bandyti dar kartą"}],
+        "Klaidos: " + 'Užpildykite laukus tinkamai.', [{ text: "Bandyti dar kartą"}],
         { cancelable: false }
       );
     } else {

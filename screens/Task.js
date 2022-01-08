@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, Dimensions, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
+
+const screen = Dimensions.get("window");
 
 class Task extends Component {
   constructor(props) {
@@ -15,9 +17,9 @@ class Task extends Component {
     };
 
     
-    setTimeout(() => {
-      this.setGoodAns();
-    }, 7000);
+    // setTimeout(() => {
+    //   this.setGoodAns();
+    // }, 7000);
     
   }
 
@@ -52,11 +54,16 @@ class Task extends Component {
   }
 
   goToActionSpace = () => {
-    this.props.navigation.navigate("actionSpace");
+    
+    // if (this.state.answer1 == '29'){
+    //   this.props.navigation.navigate("actiondemo");
+    // } else {    
+      this.props.navigation.navigate("actionSpace"); 
+    // }
   }
 
   checkAns = () => {
-
+    
     if (this.props.DataToShow.answer1 != this.state.answer1) {
       this.setState({answer1color: 'rgba(255,51,51,0.8)'});
     }
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: screen.width/28,
     color: "white",
     textAlign: "center",
   },

@@ -233,10 +233,11 @@ class MoneyRoom extends Component {
                 <View>
                 <Text style={styles.currencyText}> €: {this.state.currencyNumber}</Text>
                 </View>
+                <Text> </Text>
                 <View>
                 
                 <MyTextInput
-                    title="Ringito kursas:"
+                    title="Kursas:"
                     value={this.state.answer2}
                     bgcolor={this.state.answer2color}
                     ktype="numeric"
@@ -246,6 +247,8 @@ class MoneyRoom extends Component {
                 />
                 
                 </View>
+
+                <Text> </Text>
 
                 <View style={{flexDirection: 'row'}}>
                     <Button
@@ -364,9 +367,11 @@ const styles = StyleSheet.create({
   areaAround: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'green',
     backgroundColor: 'rgba(196,147,78,0.9)',
     borderRadius: 20,
     width: '95%',
+    height: '40%',
   },
   input: {
     padding: 7,

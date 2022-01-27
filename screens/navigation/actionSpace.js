@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
+import { Text, StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
 import Button from "../../components/Button";
 
 const screen = Dimensions.get("window");
@@ -18,6 +18,8 @@ const card = require("../../images/card.png"); //4
 const abacus = require("../../images/abacus.png"); //2
 const city = require("../../images/vilniuscity.jpg");
 
+const infobtn = require("../../images/infobtn.png");
+
 class ActionSpace extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ class ActionSpace extends Component {
       showDorsStart: true,
       gameStart: false,
       gameEnd: false,
+      showInfo: false,
       goToCityShow: false,
       doors: require("../../images/liftfull.png"),
       fadeInImage: new Animated.Value(0),
@@ -296,11 +299,25 @@ class ActionSpace extends Component {
       
       
   }
+  
+  changeViewInfo = () => {
+    if(this.state.showInfo == false){
+      this.setState({ showInfo: true });
+    } else { this.setState({ showInfo: false }); }
+    
+    this.forceUpdate();
+  }
+
+  changeViewInfoBack = () => {
+    this.setState({ showInfo: false });
+    this.forceUpdate();
+  }
 
   gotoTaskWindows = () => {
     this.props.navigation.navigate('questions');
     this.setState({gameStart: false});
     this.state.basePlaces[15].respond = true;
+    this.setState({showInfo: false});
     this.forceUpdate();
   }
 
@@ -386,6 +403,42 @@ class ActionSpace extends Component {
       else return;
     };
 
+    const infoZone = () => {
+      if (this.state.showDorsStart == false)
+      return (
+        <View 
+        style={styles.infoAreaStyle}>
+          
+          <TouchableOpacity onPress={() => {
+              this.changeViewInfo(); }}>
+            <Image
+            source={infobtn}
+            style={styles.imageIconStyle}
+            />
+          </TouchableOpacity>
+
+        </View>
+      );
+    };
+
+    const infoText = () => {
+      
+      if (this.state.showInfo == true){
+        return (
+          <TouchableOpacity style={styles.infoTextAp} onPress={() => {
+            this.changeViewInfoBack(); }}>
+            <View>
+            <Text style={styles.infoText} > Tikslas </Text>
+            <Text style={styles.infoText} > Įeiti į žaidimo užduotis panaudojus daiktus iš krepšelio. </Text>
+            <Text style={styles.infoText} > Palietus daiktą, jis bus aktyvuotas ir leis įeiti į užduotį. </Text>
+
+            </View>
+          </TouchableOpacity>
+          
+        );
+      } else return;
+    };
+
     return (
       <ImageBackground 
       source={this.state.imageBack}
@@ -414,6 +467,8 @@ class ActionSpace extends Component {
   
 
       {buttonShow()}
+      {infoZone()}
+      {infoText()}
       {imageShowOpen()}
       {goToCityShow()}    
       
@@ -466,5 +521,36 @@ const styles = StyleSheet.create({
   fadingContainer: {
     padding: 20,
     backgroundColor: "powderblue"
+  },
+  infoAreaStyle: {
+    position: 'absolute',
+    right: 8,
+    bottom: 10,
+    //backgroundColor: "rgba(0,76,153,0.8)",
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageIconStyle: {
+    margin: 5,
+    height: 60,
+    width: 60,
+    resizeMode: 'stretch',
+  },
+  infoTextAp: {
+    width: '95%',
+    height: 60,
+    alignSelf: 'center',
+    backgroundColor: "rgba(0,76,153,0.8)",
+    position: 'absolute',
+    top: 30,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

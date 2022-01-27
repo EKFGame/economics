@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Dimensions, TouchableOpacity, View } from "react-native";
+import { Image, Text, Dimensions, TouchableOpacity, View, StyleSheet } from "react-native";
 import NavBase from "./NavigationBase";
 import Button from "../../components/Button";
 
@@ -7,6 +7,8 @@ const IMAGE = require("../../images/cityPlace.jpg");
 const IMAGE_WIDTH = 2704;
 const IMAGE_HEIGHT = 978;
 const screen = Dimensions.get("window");
+
+const infobtn = require("../../images/infobtn.png");
 
 class CityPlace extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class CityPlace extends Component {
       tvarusVerslas: 'https://www.lietuviuzodynas.lt/zodynas/Tvarus',
       debetas: 'http://zodynas.vz.lt/Debetas',
       
+      showInfo: false,
       allSitesAreVisited: false,
 
       sitesAreVisited: {
@@ -31,6 +34,20 @@ class CityPlace extends Component {
     
     };
   }
+
+  changeViewInfo = () => {
+    if(this.state.showInfo == false){
+      this.setState({ showInfo: true });
+    } else { this.setState({ showInfo: false }); }
+    
+    this.forceUpdate();
+  }
+
+  changeViewInfoBack = () => {
+    this.setState({ showInfo: false });
+    this.forceUpdate();
+  }
+
 
   getScreenWidth = () => {
     return (IMAGE_WIDTH / IMAGE_HEIGHT) * screen.height;
@@ -76,6 +93,8 @@ class CityPlace extends Component {
 
   checkOrAllSitesIsVisited = () => {
     
+    this.setState({showInfo: false});
+
     let counter = 0;
 
     for (let i = 0; i < 5; i++) {
@@ -84,7 +103,7 @@ class CityPlace extends Component {
       }
     }
     
-    if (counter == 5) {
+    if (counter == 5) { //5
       setTimeout(() => {
         this.setState({ allSitesAreVisited: true });
         this.forceUpdate();  
@@ -102,6 +121,42 @@ class CityPlace extends Component {
 
   render() {
     
+    const infoZone = () => {
+      return (
+        <View 
+        style={styles.infoAreaStyle}>
+          
+          <TouchableOpacity onPress={() => {
+              this.changeViewInfo(); }}>
+            <Image
+            source={infobtn}
+            style={styles.imageIconStyle}
+            />
+          </TouchableOpacity>
+
+        </View>
+      );
+    };
+
+    const infoText = () => {
+      
+      if (this.state.showInfo == true){
+        return (
+          <View>
+            <TouchableOpacity style={styles.infoTextAp} onPress={() => {
+              this.changeViewInfoBack(); }}>
+              <View>
+              <Text style={styles.infoText} > Tikslas </Text>
+              <Text style={styles.infoText} > Užeiti į visus pastatus ir įvykdyti užduotis juose. </Text>
+              <Text style={styles.infoText} > Įveikus visas užduotis bus galima keliauti toliau. </Text>
+
+              </View>
+            </TouchableOpacity>
+          </View>
+        );
+      } else return;
+    };
+
     const buttonShow = () => {
       if (this.state.allSitesAreVisited)
         return (
@@ -264,11 +319,47 @@ class CityPlace extends Component {
             Tvarus Verslas
           </Text>
         </TouchableOpacity>
-
+        
+        {infoZone()}
+        {infoText()}
         {buttonShow()}
       </NavBase>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  infoAreaStyle: {
+    position: 'absolute',
+    left: 910,
+    top: 10,
+    //backgroundColor: "rgba(0,76,153,0.8)",
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageIconStyle: {
+    margin: 5,
+    height: 60,
+    width: 60,
+    resizeMode: 'stretch',
+  },
+  infoTextAp: {
+    width: '20%',
+    height: 60,
+    alignSelf: 'center',
+    backgroundColor: "rgba(0,76,153,0.8)",
+    position: 'absolute',
+    top: 90,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 
 export default CityPlace;

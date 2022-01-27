@@ -3,7 +3,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { TextInput, Dimensions ,StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native';
 import Button from '../components/Button';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screen = Dimensions.get("window");
 const imageBack = require("../images/space.jpg");
@@ -113,8 +112,7 @@ export default function FinancesTwo({ navigation: { navigate }}) {
     // }
 
     if (squareAns[0] == '5' && squareAns[1] == '3' && squareAns[2] == '4' && squareAns[3] == '2' && squareAns[4] == '6' && squareAns[5] == '1') {
-        
-      //AsyncStorage.setItem('dateend', new Date().getTime().toString());
+      
       Alert.alert(
           "Atsakymai teisingi!",
           "", [{ text: "Gerai", onPress:() => goToSpace()}],
@@ -123,11 +121,11 @@ export default function FinancesTwo({ navigation: { navigate }}) {
 
     } else {
 
-        Alert.alert(
-            "Ne visi atsakymai yra teisingi!",
-            "", [{ text: "Gerai" }],
-            { cancelable: false }
-        );
+      Alert.alert(
+          "Ne visi atsakymai yra teisingi!",
+          "", [{ text: "Gerai" }],
+          { cancelable: false }
+      );
 
     }
     

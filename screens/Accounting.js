@@ -206,7 +206,7 @@ class Accounting extends Component {
         if (counter == 9) { //9
         
             Alert.alert(
-                "Atsakymai teisingi!",
+                "Visi žodžiai surasti!",
                 "", [{ text: "Gerai", onPress:() => this.goToSpace()}],
                 { cancelable: false }
             );

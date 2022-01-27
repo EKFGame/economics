@@ -7,6 +7,8 @@ import {
   View,
   Image,
   ImageBackground,
+  TouchableOpacity,
+  Text,
 } from "react-native";
 import Button from "../../components/Button";
 
@@ -19,6 +21,8 @@ const umbrela = require("../../images/umbrela.png");
 const tablet = require("../../images/tablet.png");
 const card = require("../../images/card.png");
 const abacus = require("../../images/abacus.png");
+
+const infobtn = require("../../images/infobtn.png");
 
 const goods = {
   1: {
@@ -60,6 +64,7 @@ class Lift extends Component {
       showDorsStart: true,
       showDorsEnd: false,
       allGoodArePicked: false,
+      showInfo: false,
 
       goodsArePickedUp: {
         0: { pickup: false },
@@ -142,7 +147,7 @@ class Lift extends Component {
     }
 
     counter = 0;
-
+    this.setState({ showInfo: false });
     this.forceUpdate();
   };
 
@@ -206,6 +211,19 @@ class Lift extends Component {
   gotoActionSpace = () => {
     this.closeLiftDoors();
   };
+
+  changeViewInfo = () => {
+    if(this.state.showInfo == false){
+      this.setState({ showInfo: true });
+    } else { this.setState({ showInfo: false }); }
+    
+    this.forceUpdate();
+  }
+
+  changeViewInfoBack = () => {
+    this.setState({ showInfo: false });
+    this.forceUpdate();
+  }
 
   render() {
     
@@ -304,6 +322,42 @@ class Lift extends Component {
       );
     };
 
+    const infoZone = () => {
+      if (this.state.showDorsStart == false)
+      return (
+        <View 
+        style={styles.infoAreaStyle}>
+          
+          <TouchableOpacity onPress={() => {
+              this.changeViewInfo(); }}>
+            <Image
+            source={infobtn}
+            style={styles.imageIconStyle}
+            />
+          </TouchableOpacity>
+
+        </View>
+      );
+    };
+
+    const infoText = () => {
+      
+      if (this.state.showInfo == true){
+        return (
+          <TouchableOpacity style={styles.infoTextAp} onPress={() => {
+            this.changeViewInfoBack(); }}>
+            <View>
+            <Text style={styles.infoText} > Tikslas </Text>
+            <Text style={styles.infoText} > Surinkti lifte esančius daiktus ir susidėti juos į krepšelį. </Text>
+            <Text style={styles.infoText} > Daiktas bus įdėtas į krepšelį jį palietus. </Text>
+
+            </View>
+          </TouchableOpacity>
+          
+        );
+      } else return;
+    };
+
     const basketZoneItem = (item, good) => {
       
       if (this.state.goodsArePickedUp[item].pickup == true){
@@ -327,7 +381,9 @@ class Lift extends Component {
         {showStuffs()}
         {imageShowOpen()}
         {basketZone()}
+        {infoZone()}
         {buttonShow()}
+        {infoText()}
         {imageShowClose()}
       </ImageBackground>
     );
@@ -375,6 +431,37 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  infoAreaStyle: {
+    position: 'absolute',
+    left: 10,
+    top: (screen.height / 5) +  (screen.height/2.5) + 5,
+    //backgroundColor: "rgba(0,76,153,0.8)",
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageIconStyle: {
+    margin: 5,
+    height: 60,
+    width: 60,
+    resizeMode: 'stretch',
+  },
+  infoTextAp: {
+    width: '95%',
+    height: 60,
+    alignSelf: 'center',
+    backgroundColor: "rgba(0,76,153,0.8)",
+    position: 'absolute',
+    top: 30,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

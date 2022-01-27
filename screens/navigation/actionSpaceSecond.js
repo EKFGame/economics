@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
+import { Text, StyleSheet, View, Dimensions, TouchableOpacity, Animated, PanResponder, ImageBackground, Image, Touchable } from "react-native";
 import Button from "../../components/Button";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -19,6 +19,8 @@ const card = require("../../images/card.png"); //4
 const abacus = require("../../images/abacus.png"); //2
 const city = require("../../images/endofgame.jpg");
 
+const infobtn = require("../../images/infobtn.png");
+
 class ActionSpaceTwo extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,7 @@ class ActionSpaceTwo extends Component {
       imageBack: require("../../images/space.jpg"),
       gameStart: false,
       gameEnd: false,
+      showInfo: false,
       goToRegistration: false,
       fadeInImage: new Animated.Value(0),
 
@@ -184,7 +187,6 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[16].respond = true;
         this.movePanObject(15, sizeofx+10);
         this.props.navigation.navigate('bussiness');
-        //this.props.navigation.navigate('accounting');
       }
 
       if(index == 4 && this.state.basePlaces[16].used == true){
@@ -193,7 +195,6 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[17].respond = true;
         this.movePanObject(16, sizeofx+10);
         this.props.navigation.navigate('accounting');
-        //this.props.navigation.navigate('idtask');
       }
 
       if(index == 8 && this.state.basePlaces[17].used == true == true){
@@ -202,7 +203,6 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[18].respond = true;
         this.movePanObject(17, sizeofx+10);
         this.props.navigation.navigate('idtask');
-        //this.props.navigation.navigate('moneyroom');
       }
 
       if(index == 10 && this.state.basePlaces[18].used == true == true ){
@@ -211,7 +211,6 @@ class ActionSpaceTwo extends Component {
         this.state.basePlaces[19].respond = true;
         this.movePanObject(18, sizeofx+10);
         this.props.navigation.navigate('moneyroom');
-        //this.props.navigation.navigate('financestwo');
       }
 
       if(index == 12 && this.state.basePlaces[19].used == true == true){
@@ -271,6 +270,19 @@ class ActionSpaceTwo extends Component {
       
   }
 
+  changeViewInfo = () => {
+    if(this.state.showInfo == false){
+      this.setState({ showInfo: true });
+    } else { this.setState({ showInfo: false }); }
+    
+    this.forceUpdate();
+  }
+
+  changeViewInfoBack = () => {
+    this.setState({ showInfo: false });
+    this.forceUpdate();
+  }
+
   updateStorageAngGoOut = () => {
     AsyncStorage.setItem('dateend', new Date().getTime().toString());
     this.props.navigation.navigate('registration');
@@ -286,7 +298,41 @@ class ActionSpaceTwo extends Component {
 
   render() {
 
+    const infoZone = () => {
+      
+      return (
+        <View 
+        style={styles.infoAreaStyle}>
+          
+          <TouchableOpacity onPress={() => {
+              this.changeViewInfo(); }}>
+            <Image
+            source={infobtn}
+            style={styles.imageIconStyle}
+            />
+          </TouchableOpacity>
 
+        </View>
+      );
+    };
+
+    const infoText = () => {
+      
+      if (this.state.showInfo == true){
+        return (
+          <TouchableOpacity style={styles.infoTextAp} onPress={() => {
+            this.changeViewInfoBack(); }}>
+            <View>
+            <Text style={styles.infoText} > Tikslas </Text>
+            <Text style={styles.infoText} > Įeiti į žaidimo užduotis panaudojus daiktus iš krepšelio. </Text>
+            <Text style={styles.infoText} > Palietus daiktą, jis bus aktyvuotas ir leis įeiti į užduotį. </Text>
+
+            </View>
+          </TouchableOpacity>
+          
+        );
+      } else return;
+    };
     
     const goToRegistration = () => {
       if (this.state.goToRegistration == true) {
@@ -372,6 +418,8 @@ class ActionSpaceTwo extends Component {
   
 
       {buttonShow()}
+      {infoZone()}
+      {infoText()}
       {goToRegistration()}    
       
       </ImageBackground>
@@ -423,5 +471,36 @@ const styles = StyleSheet.create({
   fadingContainer: {
     padding: 20,
     backgroundColor: "powderblue"
+  },
+  infoAreaStyle: {
+    position: 'absolute',
+    right: 5,
+    bottom: 10,
+    //backgroundColor: "rgba(0,76,153,0.8)",
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageIconStyle: {
+    margin: 5,
+    height: 60,
+    width: 60,
+    resizeMode: 'stretch',
+  },
+  infoTextAp: {
+    width: '95%',
+    height: 60,
+    alignSelf: 'center',
+    backgroundColor: "rgba(0,76,153,0.8)",
+    position: 'absolute',
+    top: 30,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

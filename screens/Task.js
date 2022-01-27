@@ -15,34 +15,7 @@ class Task extends Component {
       answer1color: "white",
       answer2color: "white",
     };
-
     
-    // setTimeout(() => {
-    //   this.setGoodAns();
-    // }, 7000);
-    
-  }
-
-  setGoodAns = () => {
-    if (this.props.DataToShow.answer1 == '56'){
-      this.setState({ answer1 : this.props.DataToShow.answer1});
-      this.setState({ answer2 : this.props.DataToShow.answer2});  
-    }
-
-    if (this.props.DataToShow.answer1 == '29'){
-      this.setState({ answer1 : this.props.DataToShow.answer1});
-      this.setState({ answer2 : this.props.DataToShow.answer2});  
-    }
-
-    if (this.props.DataToShow.answer1 == '18'){
-      this.setState({ answer1 : this.props.DataToShow.answer1});
-      this.setState({ answer2 : this.props.DataToShow.answer2});  
-    }
-
-    if (this.props.DataToShow.answer1 == '61'){
-      this.setState({ answer1 : this.props.DataToShow.answer1});
-      this.setState({ answer2 : this.props.DataToShow.answer2});  
-    }
   }
 
   answer1Change(answer1) {
@@ -54,12 +27,7 @@ class Task extends Component {
   }
 
   goToActionSpace = () => {
-    
-    // if (this.state.answer1 == '29'){
-    //   this.props.navigation.navigate("actiondemo");
-    // } else {    
-      this.props.navigation.navigate("actionSpace"); 
-    // }
+    this.props.navigation.navigate("actionSpace");
   }
 
   checkAns = () => {
@@ -91,8 +59,6 @@ class Task extends Component {
     }
 
   }
-
-  
 
   render() {
 
@@ -128,8 +94,6 @@ class Task extends Component {
             this.checkAns();
           }}
         />
-
-        
       </View>
     );
   }

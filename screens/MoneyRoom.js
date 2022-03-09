@@ -4,6 +4,7 @@ import { Alert, TextInput, Dimensions, ImageBackground, StyleSheet, Text, View, 
 import MyTextInput from "../components/TextInput";
 import Button from "../components/Button";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import datadb from "./database";
 
 const screen = Dimensions.get("window");
 
@@ -11,6 +12,8 @@ const twooolira = require("../images/twooolira.jpg");
 const oneoodollars = require("../images/oneoodollars.jpg");
 const oneooeuro = require("../images/oneooeuros.jpg");
 const oneoooringgit = require("../images/oneoooringgit.jpg");
+
+const ArrayOfData = datadb.returnAllData();
 
 class MoneyRoom extends Component {
   constructor(props) {
@@ -26,7 +29,7 @@ class MoneyRoom extends Component {
         trilionGoIn: false, 
         currencyGoIn: false, 
         webData: 'https://www.youtube.com/watch?v=hgIfB-bxAUg',
-        videoSecondWeb: 'https://youtu.be/rSO0DNNpKb8',
+        videoSecondWeb: ArrayOfData[33].data, //'https://youtu.be/rSO0DNNpKb8',
         answer1color: 'white',
         answer1: '',
         answer2color: 'white',
@@ -57,8 +60,8 @@ class MoneyRoom extends Component {
   updateData = (num) => {
     
     setTimeout(() => {
-        if(num == 1) {this.setState({video1: true});}
-        if(num == 2) {this.setState({video2: true});}
+          this.setState({video1: true});
+          this.setState({video2: true});
         this.forceUpdate();  
     }, 1000); 
   }
@@ -155,9 +158,9 @@ class MoneyRoom extends Component {
         if (this.state.bothAreas == true){
         return (
         <View >
-            <TouchableOpacity style={styles.lirasPlace} onPress={() => { this.goToWebFirst() }}>
+            {/* <TouchableOpacity style={styles.lirasPlace} onPress={() => { this.goToWebFirst() }}>
               <Image source={twooolira} style={[styles.image, {transform: [{rotate: '-30deg'}]}]}></Image>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             
             <TouchableOpacity style={styles.dollarsPlace} onPress={() => { this.goToWebSecond() }}>
               <Image source={oneoodollars} style={[styles.image, {transform: [{rotate: '25deg'}]}]}></Image>
@@ -173,7 +176,7 @@ class MoneyRoom extends Component {
           return (
             <View>
             <TouchableOpacity style={styles.euroPlace} onPress={() => { this.goToTrilion() }}>
-              <Image source={oneooeuro} style={[styles.image, {transform: [{rotate: '30deg'}]}]}></Image>
+              <Image source={twooolira} style={[styles.image, {transform: [{rotate: '10deg'}]}]}></Image>
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.ringgitPlace} onPress={() => { this.goToCurrency() }}>
@@ -228,6 +231,7 @@ class MoneyRoom extends Component {
 
                 <View style={styles.areaAround}>
                 <View>
+                    <Text></Text>
                     <Text style={styles.questionText}> Kiek Eurų maždaug sudaro trilijonas Malaizijos Ringitų? </Text>
                 </View>                    
                 <View>
@@ -328,7 +332,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: screen.height/ 10,
     width: screen.width/ 2.5,
-    right: 20,
+    right: screen.width/4,
     top: screen.width/ 0.8,
   },
   euroPlace: {
@@ -371,7 +375,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(196,147,78,0.9)',
     borderRadius: 20,
     width: '95%',
-    height: '40%',
+    height: '47%',
   },
   input: {
     padding: 7,

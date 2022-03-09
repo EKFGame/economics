@@ -35,7 +35,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="splash">
+        <Stack.Navigator initialRouteName="registration">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}
@@ -69,8 +69,8 @@ class App extends Component {
             <Stack.Screen
             name="webtocheck"
             component={WebToCheck}
-            options={{ headerShown: true }}
-            options={{ title: 'Žiniatinklis' }}
+            options={{ headerShown: true, title: 'Žiniatinklis' }}
+            //options={{  }}
           />
             <Stack.Screen
             name="lift"

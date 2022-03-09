@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { Alert, ImageBackground, StyleSheet } from "react-native";
 import "react-native-gesture-handler";
-
+import datadb from "./database";
 const splashImg = require("../images/splashimage.png");
 
 class SplashWin extends Component{
@@ -11,12 +11,29 @@ class SplashWin extends Component{
         this.state = {
         };
         this.handleSubmit();
+        this.uploadData();
     }
     
+    uploadData = () => {
+        datadb.getAllDataFromDB();
+    }
+
     handleSubmit = () => {
         setTimeout(() => {
-            this.props.navigation.navigate("wellcome");
-          }, 5000);
+            
+            if (datadb.getAllDataFromDB() != null){
+                this.props.navigation.navigate("wellcome");
+            } else {
+
+                Alert.alert(
+                    "Problemos su duomenų baze",
+                    "", [{ text: "Gerai" }],
+                    { cancelable: false }
+                );
+
+            }
+            
+          }, 7000);
     };
     
     render(){

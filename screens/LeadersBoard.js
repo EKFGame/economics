@@ -72,10 +72,11 @@ class LeadersBoard extends Component {
     const renderUser = (itemData) => {
         
       const splitedTime = itemData.item.timeduration[0] + itemData.item.timeduration[1] + ':' + itemData.item.timeduration[2] + itemData.item.timeduration[3] + ':' + itemData.item.timeduration[4] + itemData.item.timeduration[5];
-        return (
+      var numberLeft = 18 - itemData.item.userfirstname.length; 
+      return (
         <View style={{backgroundColor: 'rgba(1,48,90,0.7)', borderRadius: 10, margin: 5}}>
             <View>
-              <Text style={styles.data} >{splitedTime} {itemData.item.userfirstname} {itemData.item.userlastname} {itemData.item.today}</Text>
+              <Text style={styles.data} >{splitedTime} {itemData.item.userfirstname} {itemData.item.userlastname.substring(0, numberLeft)} {itemData.item.today}</Text>
             </View>
         </View>
         );

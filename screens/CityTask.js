@@ -3,7 +3,10 @@ import React, { Component, useState } from "react";
 import { Picker, Alert, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
+import datadb from "./database";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const ArrayOfData = datadb.returnAllData();
 
 class CityTask extends Component {
   constructor(props) {
@@ -154,9 +157,9 @@ class CityTask extends Component {
   
   checkAnsOfDraudimas = () => {
 
-    if(this.state.answer1 == "4") { this.changeColors(1,0) } else {this.changeColors(1,1)}
+    if(this.state.answer1 == ArrayOfData[29].data) { this.changeColors(1,0) } else {this.changeColors(1,1)}
     
-    if (this.state.answer1 == "4") {
+    if (this.state.answer1 == ArrayOfData[29].data) { //4
         this.allDataIsGoodForOne();
     }
   }
@@ -176,7 +179,7 @@ class CityTask extends Component {
     } else { numbdec = this.state.answer1; }
     
     if(this.checkDecimal(numbdec)){
-        if(numbdec > 4.6 && numbdec < 5.3) {
+        if(numbdec > ArrayOfData[25].data && numbdec < ArrayOfData[26].data) { // 4.6 - 5.3
             this.changeColors(1,0)
             this.allDataIsGoodForCurrency();
             AsyncStorage.setItem('currency', numbdec);
@@ -187,9 +190,9 @@ class CityTask extends Component {
 
   checkAnsOfInvestavimas = () => {
 
-    if(this.state.answer1 == "5") { this.changeColors(1,0) } else {this.changeColors(1,1)}
+    if(this.state.answer1 == ArrayOfData[22].data) { this.changeColors(1,0) } else {this.changeColors(1,1)}
     
-    if (this.state.answer1 == "5") {
+    if (this.state.answer1 == ArrayOfData[22].data) { //5
         this.allDataIsGoodForOne();
     }
   }
@@ -317,7 +320,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Kiek iš viso yra draudimo rūšių? </Text>
+                <Text style={styles.questionText}> {ArrayOfData[28].data} </Text>
                 </View>                    
                 
                 <View>
@@ -354,7 +357,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Kiek yra investavimo taisyklių? </Text>
+                <Text style={styles.questionText}> {ArrayOfData[21].data} </Text>
                 </View>                    
                 
                 <View>
@@ -391,7 +394,7 @@ class CityTask extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                 <View>
-                <Text style={styles.questionText}> Koks yra Malaizijos Ringito kursas? </Text>
+                <Text style={styles.questionText}> {ArrayOfData[24].data} </Text>
                 </View>                    
                 
                 <View>

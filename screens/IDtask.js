@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: 20,
+    fontSize: screen.width / 28,
     alignItems: 'center',
     textAlign: 'center',
     fontWeight: 'bold',
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
   draggableContainer: {
     position: "absolute",
     backgroundColor: "rgba(255,255,255,0.8)",
-    height: 60,
+    height: screen.height / 12,
     width: answerSizeWidth,
     borderRadius: 10,
     alignItems: 'center',
@@ -447,7 +447,7 @@ const styles = StyleSheet.create({
   },
   PickPlace: {
     backgroundColor: "rgba(73,84,160,0.8)",
-    height: 70,
+    height: screen.height / 10,
     width: answerSizeWidth+5,
     borderRadius: 10,
     alignItems: 'center',
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
   textOfAns: {
     textAlign: 'center',
     color: 'black',
-    fontSize: 16,
+    fontSize: screen.width / 28,
     fontWeight: 'bold',
   },
 });

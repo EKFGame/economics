@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, Dimensions, TouchableOpacity } from "react-native";
 import NavBase from "./NavigationBase";
-
+import datadb from "../database";
 const IMAGE = require("../../images/outside.jpg");
 const IMAGE_WIDTH = 3382;
 const IMAGE_HEIGHT = 1611;
@@ -11,8 +11,19 @@ class Outside extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      webData: 'https://ekf.viko.lt',
+      webData: 'https://www.viko.lt',
+      webDataList: datadb.returnAllData(),
     };
+
+    this.replaceVikoData();
+  }
+
+  replaceVikoData = () => {
+
+    setTimeout(() => {
+      this.setState({ webData: this.state.webDataList[0].data });
+    }, 1500);
+    
   }
 
   Data = 'https://ekf.viko.lt/';

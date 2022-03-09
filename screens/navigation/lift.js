@@ -65,6 +65,7 @@ class Lift extends Component {
       showDorsEnd: false,
       allGoodArePicked: false,
       showInfo: false,
+      showStuffsInd: false,
 
       goodsArePickedUp: {
         0: { pickup: false },
@@ -193,6 +194,7 @@ class Lift extends Component {
     
     setTimeout(() => {
       this.setState({ imageBack: require("../../images/liftas.jpg") });
+      this.setState({showStuffsInd: true});
     }, 600);
     setTimeout(() => {
       this.setState({ doors: require("../../images/lift14.png") });
@@ -265,24 +267,25 @@ class Lift extends Component {
     };
 
     const showStuffs = () => {
-      //if (this.state.showDorsStart == false)
-      return (
-        <View>
-          {this.dataDrag.map((d, index) => (
-            <Animated.View
-              key={index}
-              {...this.getPanResponder(index).panHandlers}
-              style={[
-                styles.draggableContainer,
-                { width: goods[index].width, height: goods[index].height },
-                this.pan[index].getTranslateTransform(),
-              ]}
-            >
-              <Image source={goods[index].thing} style={styles.image}></Image>
-            </Animated.View>
-          ))}
-        </View>
-      );
+      if (this.state.showStuffsInd != false){
+        return (
+          <View>
+            {this.dataDrag.map((d, index) => (
+              <Animated.View
+                key={index}
+                {...this.getPanResponder(index).panHandlers}
+                style={[
+                  styles.draggableContainer,
+                  { width: goods[index].width, height: goods[index].height },
+                  this.pan[index].getTranslateTransform(),
+                ]}
+              >
+                <Image source={goods[index].thing} style={styles.image}></Image>
+              </Animated.View>
+            ))}
+          </View>
+        );
+      } else return;
     };
 
     const buttonShow = () => {
@@ -449,7 +452,7 @@ const styles = StyleSheet.create({
   },
   infoTextAp: {
     width: '95%',
-    height: 60,
+    height: screen.height / 9,
     alignSelf: 'center',
     backgroundColor: "rgba(0,76,153,0.8)",
     position: 'absolute',
@@ -459,7 +462,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: screen.width / 27,
     color: 'white',
     fontWeight: 'bold',
   },

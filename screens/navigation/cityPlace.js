@@ -3,6 +3,8 @@ import { Image, Text, Dimensions, TouchableOpacity, View, StyleSheet } from "rea
 import NavBase from "./NavigationBase";
 import Button from "../../components/Button";
 
+import datadb from "../database";
+
 const IMAGE = require("../../images/cityPlace.jpg");
 const IMAGE_WIDTH = 2704;
 const IMAGE_HEIGHT = 978;
@@ -10,16 +12,18 @@ const screen = Dimensions.get("window");
 
 const infobtn = require("../../images/infobtn.png");
 
+const ArrayOfData = datadb.returnAllData();
+
 class CityPlace extends Component {
   constructor(props) {
     super(props);
     this.state = {
       
-      lietuvosBankas: 'https://www.lb.lt/lt/kasdien-skelbiami-euro-ir-uzsienio-valiutu-santykiai-skelbia-europos-centrinis-bankas',
-      lietuvosBankasInvestavimas: 'https://www.lb.lt/lt/investavimas-nuo-ko-pradeti',
-      eDrauda: 'https://www.edrauda.lt/',
-      tvarusVerslas: 'https://www.lietuviuzodynas.lt/zodynas/Tvarus',
-      debetas: 'http://zodynas.vz.lt/Debetas',
+      lietuvosBankas: ArrayOfData[27].data, // 'https://www.lb.lt/lt/kasdien-skelbiami-euro-ir-uzsienio-valiutu-santykiai-skelbia-europos-centrinis-bankas',
+      lietuvosBankasInvestavimas: ArrayOfData[23].data, // 'https://www.lb.lt/lt/investavimas-nuo-ko-pradeti',
+      eDrauda: ArrayOfData[30].data, // 'https://www.edrauda.lt/',
+      tvarusVerslas: ArrayOfData[32].data, //'https://www.lietuviuzodynas.lt/zodynas/Tvarus',
+      debetas: ArrayOfData[31].data, // 'http://zodynas.vz.lt/Debetas',
       
       showInfo: false,
       allSitesAreVisited: false,

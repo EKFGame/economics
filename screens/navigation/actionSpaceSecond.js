@@ -489,7 +489,7 @@ const styles = StyleSheet.create({
   },
   infoTextAp: {
     width: '95%',
-    height: 60,
+    height: screen.height / 9,
     alignSelf: 'center',
     backgroundColor: "rgba(0,76,153,0.8)",
     position: 'absolute',
@@ -499,7 +499,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: screen.width / 27,
     color: 'white',
     fontWeight: 'bold',
   },

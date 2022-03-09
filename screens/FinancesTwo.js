@@ -272,7 +272,6 @@ export default function FinancesTwo({ navigation: { navigate }}) {
                     color = 'black'
                     maxLength={1}
                     keyboardType='numeric'
-                    backgroundColor = 'white'
                     onChangeText={(text) => handleUpdate(inputTextItem,text)}
                     />
                     </View>
@@ -405,7 +404,7 @@ const styles = StyleSheet.create({
   item: {
     margin: 10,
     padding: 30,
-    fontSize: 16,
+    fontSize: screen.width / 25,
     borderRadius: 15,
     backgroundColor: 'dodgerblue',
     alignItems: 'center',
@@ -416,7 +415,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: screen.width / 18,
+    fontSize: screen.width / 22,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
@@ -426,7 +425,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     marginTop: 20,
-    fontSize: screen.width / 26.5,
+    fontSize: screen.width / 29,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
@@ -443,7 +442,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   dataItemsText: {
-    fontSize: screen.width / 30.5,
+    fontSize: screen.width / 32,
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',

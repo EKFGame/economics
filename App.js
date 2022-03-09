@@ -25,6 +25,7 @@ import MoneyRoom from "./screens/MoneyRoom";
 import TaskID from "./screens/IDtask";
 import ActionSpaceTwo from "./screens/navigation/actionSpaceSecond";
 import LeadersBoard from "./screens/LeadersBoard";
+import Finished from "./screens/navigation/Finished";
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ class App extends Component {
       <View style={{flex: 1}}>
         <StatusBar style="auto" />
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="registration">
+        <Stack.Navigator initialRouteName="splash">
           <Stack.Screen
             name="taskScreen"
             component={TaskScreen}
@@ -140,6 +141,11 @@ class App extends Component {
           <Stack.Screen
             name="leadersboard"
             component={LeadersBoard}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="finished"
+            component={Finished}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

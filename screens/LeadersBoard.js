@@ -23,7 +23,7 @@ class LeadersBoard extends Component {
   }
 
   goToStart = () => {
-    this.props.navigation.navigate('wellcome');
+    this.props.navigation.navigate('finished');
   }
 
   updateData = () => {
@@ -103,24 +103,24 @@ class LeadersBoard extends Component {
                 </View>
             </View>
             <View style={{flex: 1, flexDirection: 'row'}} >
-                <Button
-                    color="rgba(1,48,90,0.8)"
-                    title="Pradėti iš naujo"
-                    W={160}
-                    H={60}
-                    onPress={() => {
-                    this.goToStart();
-                    }}
-                />
-                                <Button
-                    color="rgba(1,48,90,0.8)"
-                    title="Atnaujinti"
-                    W={160}
-                    H={60}
-                    onPress={() => {
-                    this.updateData();
-                    }}
-                />
+              <Button
+                  color="rgba(1,48,90,0.8)"
+                  title="Atnaujinti"
+                  W={160}
+                  H={60}
+                  onPress={() => {
+                  this.updateData();
+                  }}
+              />
+              <Button
+                  color="rgba(1,48,90,0.8)"
+                  title="Pabaiga"
+                  W={160}
+                  H={60}
+                  onPress={() => {
+                  this.goToStart();
+                  }}
+              />
             </View>
 
         </View>

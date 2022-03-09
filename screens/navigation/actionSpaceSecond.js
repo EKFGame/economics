@@ -348,7 +348,7 @@ class ActionSpaceTwo extends Component {
           <View style={styles.cityButtonplace}>
             <Button
               color="rgba(0,0,255,0.7)"
-              title="Užbaigti žaidimą!"
+              title="Keliauti toliau!"
               W={300}
               H={80}
               onPress={() => {

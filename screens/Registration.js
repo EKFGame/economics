@@ -134,7 +134,7 @@ class Registration extends Component {
 
   goToStart = () => {
     this.clearData();
-    this.props.navigation.navigate('wellcome');      
+    this.props.navigation.navigate('finished');      
   }
 
   goToLeaders = () => {
@@ -267,7 +267,7 @@ class Registration extends Component {
               />  
               <Button
                 color="rgba(1,48,90,0.8)"
-                title="Pradėti iš naujo"
+                title="Pabaiga"
                 W={160}
                 H={60}
                 onPress={() => {

@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
 
 
-class Wellcome extends Component {
+class Finished extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        imageBack: require("../../images/wellcome.jpg"),
+        imageBack: require("../../images/finished.jpg"),
     };
-  }
-
-
-  navigateToOutSideOfEKF = () => {
-    this.props.navigation.navigate('outside');
   }
 
   render() {
@@ -24,14 +19,12 @@ class Wellcome extends Component {
         resizeMode="cover"
         >
             <View style={styles.textplace}>
-                <View style={{flex: 0.2}}>
+                <View style={{flex: 1.2}}>
 
                 </View>
-                <TouchableOpacity onPress={() => { this.navigateToOutSideOfEKF();}} >
-                  <View style={styles.viewarea}>
-                      <Text style={styles.wellcomeText}> Atvyk apsilankyti! </Text>
-                  </View>
-                </TouchableOpacity>
+                <View style={styles.viewarea}>
+                    <Text style={styles.finishedText}> Sveikiname įveikus žaidimą! </Text>
+                </View>
                 <View style={{flex: 1}}>
 
                 </View>
@@ -56,7 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    wellcomeText: {
+    finishedText: {
         fontWeight: "bold",
         fontSize: 23,
         color: "white",
@@ -70,4 +63,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Wellcome;
+export default Finished;

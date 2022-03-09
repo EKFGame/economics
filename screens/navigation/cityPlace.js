@@ -173,7 +173,7 @@ class CityPlace extends Component {
           }}>
             <Button
               color="rgba(1,48,90,0.8)"
-              title="Pereiti į kitą lygį"
+              title="Keliauti toliau!"
               W={400}
               H={80}
               onPress={() => {

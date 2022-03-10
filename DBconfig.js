@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyC6SSU3aaiMS2B90pjBjp4HKWmXEs1a15Y",
-    authDomain: "economicsdb-4354b.firebaseapp.com",
-    projectId: "economicsdb-4354b",
-    storageBucket: "economicsdb-4354b.appspot.com",
-    messagingSenderId: "141436726208",
-    appId: "1:141436726208:web:e40cd8b6a202afbfe53625",
-    measurementId: "G-HHPMJETV3T"
-  };
+  apiKey: "AIzaSyAJCaLJ1a9L-VZtPCYEsugUUkl1vE5-RnU",
+  authDomain: "economics-70532.firebaseapp.com",
+  projectId: "economics-70532",
+  storageBucket: "economics-70532.appspot.com",
+  messagingSenderId: "893011041753",
+  appId: "1:893011041753:web:9e7e6822432208c5f40dc8",
+  measurementId: "G-1DVJCC2Z4L"
+};
